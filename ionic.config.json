@@ -1,0 +1,7 @@
+{
+  "name": "biometric-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
