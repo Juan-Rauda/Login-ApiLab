@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="d-flex-center">
+
+    <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+      <img width="120px" src="assets/shield.webp" alt="">
+
+      <div class="gradient-input">
+        <ion-label>Correo</ion-label>
+        <div class="input">
+          <ion-input formControlName="email" type="email" autocomplete="email" placeholder="uls@gmail.com"></ion-input>
+        </div>
+      </div>
+
+      <div class="gradient-input">
+        <ion-label>Contraseña</ion-label>
+        <div class="input">
+          <ion-input formControlName="password" type="password" placeholder="*******">
+            <ion-input-password-toggle color="dark" slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </div>
+      </div>
+
+      <p class="ion-text-end">¿Olvidaste tu contraseña?</p>
+
+      <ion-row class="ion-padding-bottom">
+        <ion-col size="9">
+          <ion-button [disabled]="form.invalid" class="gradient-btn" mode="ios" expand="block" type="submit">
+            Ingresar
+            <ion-icon slot="end" name="log-in-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="3">
+          <ion-button class="gradient-btn ion-no-padding" mode="ios" expand="block">
+            <ion-icon name="finger-print-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <p>¿No tienes cuenta? <strong>Regístrate</strong></p>
+    </form>
+
+  </div>
+
+
+</ion-content>
