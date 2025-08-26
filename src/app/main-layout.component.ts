@@ -1,0 +1,62 @@
+import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-main-layout',
+  standalone: true,
+  imports: [IonicModule, CommonModule, RouterModule],
+  template: `
+  <ion-app>
+    <!-- Menú lateral -->
+    <ion-menu contentId="main-content" side="start">
+      <ion-header class="ion-no-border">
+            <ion-toolbar color="primary">
+            <ion-title>Laboratorio</ion-title>
+            </ion-toolbar>
+
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item button routerLink="/home">
+              <ion-icon name="pulse-outline" slot="start"></ion-icon>
+              <ion-label>Inicio</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item button routerLink="/sensores">
+              <ion-icon name="thermometer-outline" slot="start"></ion-icon>
+              <ion-label>Sensores</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item button routerLink="/quimicos">
+              <ion-icon name="water-outline" slot="start"></ion-icon>
+              <ion-label>Quimicos</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button routerLink="/auth">
+              <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-menu>
+
+    <!-- Contenido principal -->
+    <div class="ion-page" id="main-content">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+  </ion-app>
+  `
+})
+export class MainLayout {}

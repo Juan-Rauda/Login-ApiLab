@@ -40,6 +40,14 @@ ion-content, ion-toolbar{
   --background: linear-gradient(to left, #0d0d0d, #001d2b);
 }
 
+
+.titulo-lab {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+
 ion-item{
   --background: transparent;
 }
