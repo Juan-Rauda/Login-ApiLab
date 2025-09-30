@@ -1,16 +1,104 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <img class="ion-margin-start" width="40px" src="assets/shield.webp" alt="">
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-buttons slot="end">
-      <ion-button routerLink="/auth">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+  <ion-content class="ion-padding">
+    <ion-text class="menu-title"><i>Tipos de químicos</i></ion-text>
+    <ion-button fill="clear" expand="block" class="menu-btn">
+      <ion-icon slot="start" name="flask-outline"></ion-icon>
+      Ácidos
+    </ion-button>
 
-  </ion-toolbar>
-</ion-header>
+    <ion-button fill="clear" expand="block" class="menu-btn">
+      <ion-icon slot="start" name="water-outline"></ion-icon>
+      Bases
+    </ion-button>
 
-<ion-content>
+    <ion-button fill="clear" expand="block" class="menu-btn">
+      <ion-icon slot="start" name="cube-outline"></ion-icon>
+      Otros
+    </ion-button>
 
-</ion-content>
+
+  </ion-content>
+  <div>
+        <ion-button fill="clear" expand="block" class="menu-btn">
+      <ion-icon slot="start" name="lock-closed"></ion-icon>
+      Iniciar Sesion
+    </ion-button>
+  </div>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Laboratorio ULS</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- UN solo ion-content para toda la página -->
+  <ion-content>
+
+    <!-- Video -->
+    <div class="video-wrapper">
+       <div class="video-header">
+      <video muted autoplay loop playsinline>
+        <source src="assets/videouls.mp4" type="video/mp4">
+        Tu navegador no soporta el video.
+      </video>
+    </div>
+    </div>
+
+    <!-- Espaciado -->
+    <br><br>
+
+  <ion-grid class="info-grid">
+    <ion-row class="ion-align-items-center tight-row responsive-row">
+      <ion-col size="12" size-md="5" class="image-col">
+        <img src="https://uls.edu.sv/sitioweb/wp-content/uploads/2024/07/a1-2.png" alt="Facultad" />
+      </ion-col>
+      <ion-col size="12" size-md="7" class="text-col">
+        <ion-card>
+  <ion-card-header>
+    <ion-card-title>Facultad De Ciencias Del Hombre Y La Naturaleza</ion-card-title>
+    <ion-card-subtitle>¿Por qué estudiar Ingeniería Agroecológica en la ULS?</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+   La carrera de Ingeniería Agroecológica nació en el año 1992 en la Universidad Luterana Salvadoreña como un enfoque alternativo a la  visión mercantiles que buscaba en ese momento comerciar con la producción de alimentos en el mundo, el modelo llamado "revolución verde", que buscaba imponer un modelo productivista basado en el uso intensivo de agrotóxicos, afectando directamente a la Madre Naturaleza.
+
+La formación agroecológica es la construcción y aplicación de saberes y prácticas que permitan comprender y resolver los complejos problemas de alimentación y socioambientales de nuestro tiempo, así como construir una nueva racionalidad para transitar hacia un desarrollo sustentable en el planeta.
+
+La disciplina científica que enfoca el estudio de la agricultura desde una perspectiva ecológica se denomina «agroecología» y se define como un marco teórico cuyo fin es analizar los procesos agrícolas de manera más amplia. El enfoque agroecológico considera a los ecosistemas agrícolas como las unidades fundamentales de estudio; y en estos sistemas, los ciclos minerales, las transformaciones de la energía, los procesos biológicos y las relaciones socioeconómicas son investigados y analizados como un todo.
+  </ion-card-content>
+</ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Segundo grid -->
+  <ion-grid class="info-grid">
+    <ion-row class="ion-align-items-center tight-row responsive-row">
+      <ion-col size="12" size-md="7" class="text-col">
+        <h1 class="title">Facultad de Ciencias del Hombre y la Naturaleza</h1>
+        <p class="text">
+          La carrera de Ingeniería Agroecológica nació en 1992 en la Universidad Luterana Salvadoreña como un enfoque alternativo...
+        </p>
+        <p class="text">
+          La formación agroecológica es la construcción y aplicación de saberes y prácticas que permitan comprender y resolver...
+        </p>
+      </ion-col>
+      <ion-col size="12" size-md="5" class="image-col">
+        <img src="https://uls.edu.sv/sitioweb/wp-content/uploads/2024/07/a1-2.png" alt="Facultad" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  </ion-content>
+</div>

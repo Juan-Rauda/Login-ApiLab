@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { SwiperModule } from 'swiper/angular';
+import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 
 import { HomePageRoutingModule } from './home-routing.module';
-
 import { HomePage } from './home.page';
+
+// Registrar los módulos de Swiper
+SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    SwiperModule // ⬅ aquí sí va
   ],
   declarations: [HomePage]
 })

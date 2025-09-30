@@ -1,17 +1,17 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
 :root {
-    --ion-color-primary: #10abff;
-    --ion-color-primary-rgb: 0, 0, 0;
-    --ion-color-primary-contrast: black;
-    --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #036092;
-    --ion-color-primary-tint: #43b8f8;
+  --ion-color-luterana: #002f6c;
+  --ion-color-luterana-rgb: 0,47,108;
+  --ion-color-luterana-contrast: #ffffff;
+  --ion-color-luterana-contrast-rgb: 255,255,255;
+  --ion-color-luterana-shade: #00285d;
+  --ion-color-luterana-tint: #1a447b;
+}
 
-    --ion-color-secondary: #1beabd;
-    --ion-color-secondary-rgb: 0, 0, 0;
-    --ion-color-secondary-contrast: black;
-    --ion-color-secondary-contrast-rgb: 255, 255, 255;
-    --ion-color-secondary-shade: #15b391;
-    --ion-color-secondary-tint: #50f3cf;
+.ion-color-luterana {
+  --ion-color-base: var(--ion-color-luterana);
+  --ion-color-base-rgb: var(--ion-color-luterana-rgb);
+  --ion-color-contrast: var(--ion-color-luterana-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-luterana-contrast-rgb);
+  --ion-color-shade: var(--ion-color-luterana-shade);
+  --ion-color-tint: var(--ion-color-luterana-tint);
 }

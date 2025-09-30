@@ -8,9 +8,9 @@
 
   <div class="d-flex-center">
 
-    <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+    <form class="auth-form" [formGroup]="form" (ngSubmit)="register()" (keypress.enter)="register()">
 
-      <img width="500px" src="assets/logo.png" alt="">
+      <img width="120px" src="assets/shield.webp" alt="">
 
       <div class="gradient-input">
         <ion-label>Correo</ion-label>
@@ -28,33 +28,33 @@
         </div>
       </div>
 
-      <p class="ion-text-end">¿Olvidaste tu contraseña?</p>
+      <div class="gradient-input">
+        <ion-label>Confirmar contraseña</ion-label>
+        <div class="input">
+          <ion-input formControlName="confirmPassword" type="password" placeholder="*******">
+            <ion-input-password-toggle color="dark" slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </div>
+      </div>
 
       <ion-row class="ion-padding-bottom">
-        <ion-col size="9">
+        <ion-col size="12">
           <ion-button [disabled]="form.invalid" class="gradient-btn" mode="ios" expand="block" type="submit">
-            Ingresar
-            <ion-icon slot="end" name="log-in-outline"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col size="3">
-          <ion-button class="gradient-btn ion-no-padding" mode="ios" expand="block">
-            <ion-icon name="finger-print-outline"></ion-icon>
+            Registrarse
+            <ion-icon slot="end" name="person-add-outline"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>
 
-<p>  ¿No tienes cuenta? </p>
-<p>
-  <ion-button color="luterana" size="medium" (click)="goToRegister()">
-    Regístrate
-  </ion-button>
-</p>
-
+      <p class="ion-text-center">
+        ¿Ya tienes cuenta? 
+        <ion-button color="luterana" size="medium" (click)="goToAuth()">
+          Inicia sesión
+        </ion-button>
+      </p>
 
     </form>
 
   </div>
-
 
 </ion-content>
