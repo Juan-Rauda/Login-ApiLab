@@ -6,10 +6,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// --- Firebase ---
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { environment } from '../environments/environment';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,11 +20,11 @@ import { environment } from '../environments/environment';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    // Inicializar Firebase y servicios
     { provide: 'firebaseApp', useValue: initializeApp(environment.firebase) },
     { provide: 'firebaseAuth', useValue: getAuth() },
     { provide: 'firebaseFirestore', useValue: getFirestore() },

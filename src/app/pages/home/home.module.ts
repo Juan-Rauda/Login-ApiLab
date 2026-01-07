@@ -18,7 +18,7 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
     ReactiveFormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SwiperModule // ⬅ aquí sí va
+    SwiperModule 
   ],
   declarations: [HomePage]
 })

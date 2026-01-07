@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard Humo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-grid>
+
+    <ion-row>
+
+      <!-- HUMEDAD -->
+      <ion-col size="12" size-md="4">
+        <ion-card class="card dashboard-humedad animate">
+          <ion-card-content>
+            <ion-icon name="water-outline" class="icon"></ion-icon>
+            <h2>{{ humedad }}%</h2>
+            <p>Humedad</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- TEMPERATURA -->
+      <ion-col size="12" size-md="4">
+        <ion-card class="card dashboard-temp animate">
+          <ion-card-content>
+            <ion-icon name="thermometer-outline" class="icon"></ion-icon>
+            <h2>{{ temperatura }}°C</h2>
+            <p>Temperatura</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- MQ2 CON SEMÁFORO -->
+      <ion-col size="12" size-md="4">
+        <ion-card class="card dashboard-mq2 animate" [ngStyle]="{'background': colorMQ2}">
+          <ion-card-content>
+            <ion-icon name="flame-outline" class="icon"></ion-icon>
+            <h2>{{ mq2 }}</h2>
+            <p>Nivel de Gas MQ2</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+
+  <!-- GRÁFICAS EN VIVO -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lecturas en Tiempo Real</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <canvas id="tempsensorChart"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

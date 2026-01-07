@@ -1,0 +1,9 @@
+@import "~swiper/swiper-bundle.min.css";
+
+:host {
+  --ion-background-color: #f0f8ff; /* color de fondo de toda la página */
+}
+
+ion-content {
+  --background: #fff8ef; /* color de contenido específicamente */
+}

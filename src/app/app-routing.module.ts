@@ -19,6 +19,21 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: 'tempsensor',
+    loadChildren: () => import('./pages/tempsensor/tempsensor.module').then( m => m.TempsensorPageModule)
+  },
+  {
+    path: 'subir-documentos',
+    loadChildren: () => import('./pages/subir-documentos/subir-documentos.module').then( m => m.SubirDocumentosPageModule)
+  },
+  {
+    path: 'listar-documentos',
+    loadChildren: () => import('./pages/listar-documentos/listar-documentos.module').then( m => m.ListarDocumentosPageModule)
+  },
+
+
+
 
 ];
 

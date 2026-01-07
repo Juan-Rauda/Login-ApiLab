@@ -9,6 +9,8 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
   styleUrls: ['./auth.page.scss'],
   standalone: false
 })
+
+//definimos el formulario en solo dos campos
 export class AuthPage implements OnInit {
 
   form = new FormGroup({
@@ -16,13 +18,14 @@ export class AuthPage implements OnInit {
     password: new FormControl('', [Validators.required])
   });
 
-  isRegister = false; // 🔹 false = login, true = registro
-  auth = getAuth();
+  isRegister = false; // nos sirve para saber si el usuario esta en forma login (false) o el registro (true)
+  auth = getAuth(); //inicializamos firebase auth
 
   constructor(private router: Router) {}
 
   ngOnInit() {}
 
+  //nuestra funcion principal donde verificamos si el formulario es valido
   async submit() {
     if (!this.form.valid) return;
 
@@ -30,27 +33,30 @@ export class AuthPage implements OnInit {
 
     try {
       if (this.isRegister) {
-        // 🔹 Registro
+        // esta funcion nos dice que si isRegister es true llamaremos a la funcion CreateuserWithEmailAndPassword
+        //lo que nos registrara un usuario
         await createUserWithEmailAndPassword(this.auth, email!, password!);
         console.log('✅ Usuario registrado');
       } else {
-        // 🔹 Login
+        // de lo contracio que IsRegister es false Llamaremos a la funcion SingIn.... lo que logueara al usuario existente
         await signInWithEmailAndPassword(this.auth, email!, password!);
         console.log('✅ Usuario logueado');
       }
 
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/home'); // si todo se cumple de manera correcta nos redirecciona a Home (temporalmente)
     } catch (err: any) {
-      console.error('❌ Error en auth:', err.message);
+      console.error('❌ Error en auth:', err.message);// mensaje de error
       alert('Error: ' + err.message);
     }
   }
 
-    goToRegister() {
+    goToRegister() { //enrutamiento a la pagina register
     this.router.navigateByUrl('/register');
   }
 
-  toggleMode() {
-    this.isRegister = !this.isRegister;
+  toggleMode() { //funcion para alternar entre registro a login
+    this.isRegister = !this.isRegister; 
   }
 }
+
+

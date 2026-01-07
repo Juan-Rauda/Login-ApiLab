@@ -1,46 +1,11 @@
-<ion-menu side="start" contentId="main-content">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Menú</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content class="ion-padding">
-    <ion-text class="menu-title"><i>Tipos de químicos</i></ion-text>
-    <ion-button fill="clear" expand="block" class="menu-btn">
-      <ion-icon slot="start" name="flask-outline"></ion-icon>
-      Ácidos
-    </ion-button>
-
-    <ion-button fill="clear" expand="block" class="menu-btn">
-      <ion-icon slot="start" name="water-outline"></ion-icon>
-      Bases
-    </ion-button>
-
-    <ion-button fill="clear" expand="block" class="menu-btn">
-      <ion-icon slot="start" name="cube-outline"></ion-icon>
-      Otros
-    </ion-button>
-
-
-  </ion-content>
-  <div>
-        <ion-button fill="clear" expand="block" class="menu-btn">
-      <ion-icon slot="start" name="lock-closed"></ion-icon>
-      Iniciar Sesion
-    </ion-button>
-  </div>
-</ion-menu>
-
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Laboratorio ULS</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button> <!-- Abre el menú global -->
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
 
   <!-- UN solo ion-content para toda la página -->
   <ion-content>
@@ -95,10 +60,85 @@ La disciplina científica que enfoca el estudio de la agricultura desde una pers
         </p>
       </ion-col>
       <ion-col size="12" size-md="5" class="image-col">
-        <img src="https://uls.edu.sv/sitioweb/wp-content/uploads/2024/07/a1-2.png" alt="Facultad" />
+        <img src="https://scontent.fsal14-1.fna.fbcdn.net/v/t39.30808-6/486187350_1061942532641905_6393317126611313820_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGvw8f6mMFXl--ZufX5adeqFyIKShSXMmwXIgpKFJcybKE74clCuWs-Be78gVYKywrsXvjRa4C8ksOcHAsbW8ag&_nc_ohc=kuudOShAKpEQ7kNvwEYyI6E&_nc_oc=AdlAt5d_47M2BUd8zcBaGtGbgXKLz3XA5nJxdrDoRpvEfZd_TcVTMBkd4CD_VT1jqmU&_nc_zt=23&_nc_ht=scontent.fsal14-1.fna&_nc_gid=hNBDkjLo-k0dqI1R0i9ScA&oh=00_AfpjHb2HiqVo9_KtaHZDUQtx-JBdCTdE5Dj8rDY9AX4SlQ&oe=695DE27C" alt="Facultad" />
       </ion-col>
     </ion-row>
   </ion-grid>
 
+  <!-- DESCRIPCIÓN DE LA APP -->
+<ion-grid class="info-grid">
+  <ion-row class="ion-align-items-center responsive-row">
+
+    <!-- Imagen -->
+    <ion-col size="12" size-md="5" class="image-col">
+      <img src="https://scontent.fsal14-1.fna.fbcdn.net/v/t39.30808-6/542761580_1193414609494696_6359329434430512574_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFHP9bybF5to0fXwk2V9h4IwxeTzad-3TXDF5PNp37dNRkyZMtMUZ9i7WcUKhS9RJFQ5fai_EqxYmtrgZLBMoEa&_nc_ohc=Xlr1LLTwTyAQ7kNvwHAetSV&_nc_oc=AdlGgW1UDQT3vxae0-hsrENmZ1ZVs5Tqc2_flXIDRriI0UWnfIgSMMeNq8vMigs7rTw&_nc_zt=23&_nc_ht=scontent.fsal14-1.fna&_nc_gid=4iZ0KgHD7sNxuAhaVuO9gA&oh=00_AfpfE-aUupo1SX02d546SXyz0h0RBnkrM-1nmUgcEATVXw&oe=695DCFD9" alt="Descripción de la app" />
+    </ion-col>
+
+    <!-- Texto -->
+    <ion-col size="12" size-md="7" class="text-col">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Plataforma Inteligente de Monitoreo Ambiental</ion-card-title>
+          <ion-card-subtitle>Control, análisis y prevención en tiempo real</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>
+            Esta aplicación ha sido diseñada para visualizar y monitorear en tiempo real
+            variables ambientales como temperatura, humedad y presencia de gases, a través
+            de sensores conectados a una base de datos en la nube.
+          </p>
+
+          <p>
+            Su objetivo es apoyar la toma de decisiones, mejorar la seguridad y facilitar
+            el control de condiciones críticas dentro de laboratorios, espacios educativos
+            o entornos productivos.
+          </p>
+
+          <p>
+            La plataforma ofrece una interfaz clara, moderna y responsiva, accesible desde
+            distintos dispositivos, permitiendo una supervisión eficiente y centralizada.
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<!-- BENEFICIOS -->
+<ion-grid class="info-grid">
+  <ion-row class="ion-align-items-center responsive-row">
+
+    <!-- Imagen -->
+    <ion-col size="12" size-md="5" class="image-col">
+      <img src="https://scontent.fsal14-1.fna.fbcdn.net/v/t39.30808-6/486181535_1062600909242734_259851957682349938_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEB-oQNIj6rW7rvqwLYFpJJgJsc7fM-EJ6Amxzt8z4QnqMSuzRSc18TNxGmHNOab6J3KuLZ-ajzCG7BlVkUwTsU&_nc_ohc=H68q4p0wMxwQ7kNvwFdUITs&_nc_oc=Adk2DFtFstIFCgvXmXULH3mtuleelajjQYMPyh_t0pF8iwu2lN_5b3u45J7J3xfx7Gc&_nc_zt=23&_nc_ht=scontent.fsal14-1.fna&_nc_gid=fpYUZW2z_t3ETK7ZpHYJlg&oh=00_AfoLyJxXJiBa3apCDJfDcfghSzjK97sL5_yMTknHHcr1Kw&oe=695DAA54" alt="Beneficios de la aplicación" />
+    </ion-col>
+
+    <!-- Índice / Beneficios -->
+    <ion-col size="12" size-md="7" class="text-col">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Beneficios de la Aplicación</ion-card-title>
+          <ion-card-subtitle>Ventajas principales del sistema</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ul class="benefits-list">
+            <li>📊 Visualización en tiempo real de sensores ambientales.</li>
+            <li>🚦 Indicadores tipo semáforo para detección rápida de riesgos.</li>
+            <li>📈 Gráficas dinámicas con historial de mediciones.</li>
+            <li>🔔 Apoyo en la prevención de incidentes mediante monitoreo continuo.</li>
+            <li>💻 Acceso desde cualquier dispositivo con interfaz responsiva.</li>
+            <li>⚙️ Integración sencilla con sensores y Firebase.</li>
+            <li>🏫 Ideal para laboratorios, instituciones educativas y proyectos académicos.</li>
+          </ul>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+
   </ion-content>
-</div>

@@ -9,7 +9,7 @@ import { RegisterPage } from './register.page';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule, // 🔹 Esto es obligatorio para formGroup
+    ReactiveFormsModule, // Esto es obligatorio para formGroup
     IonicModule,
     RegisterPageRoutingModule
   ],
