@@ -1,36 +1,41 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button> <!-- Abre el menú global -->
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-    </ion-title>
+    <ion-title>Ver Documentos</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
 
-<ion-content class="ion-padding">
+  <div class="documentos-grid">
 
-  <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
+    <ion-card class="documento-card" *ngFor="let doc of documentos">
 
-  <ion-list *ngIf="!cargando && documentos.length > 0">
+      <img
+        *ngIf="doc.imagenUrl"
+        [src]="doc.imagenUrl"
+        class="documento-img"
+      />
 
-    <ion-item *ngFor="let doc of documentos">
-      <ion-icon name="document-outline" slot="start"></ion-icon>
+      <div class="documento-body">
+        <div class="documento-title">{{ doc.nombre }}</div>
 
-      <ion-label>
-        <h2>{{ doc.nombre }}</h2>
-        <p>Documento almacenado</p>
-      </ion-label>
+        <div class="documento-desc">
+          {{ doc.descripcion || 'Sin descripción' }}
+        </div>
 
-      <ion-button fill="outline" slot="end" [href]="doc.url" target="_blank">
-        Ver
-      </ion-button>
-    </ion-item>
+        <ion-button
+          size="small"
+          expand="block"
+          class="boton-pdf"
+          (click)="abrirPdf(doc.pdfUrl)">
+          Ver PDF
+        </ion-button>
+      </div>
 
-  </ion-list>
+    </ion-card>
 
-  <ion-text color="medium" *ngIf="!cargando && documentos.length === 0">
-    <p>No hay documentos aún.</p>
-  </ion-text>
+  </div>
 
 </ion-content>

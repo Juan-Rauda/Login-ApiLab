@@ -1,7 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
-import { environment } from 'src/environments/environment';
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Firestore,
+  collection,
+  getDocs,
+  orderBy,
+  query
+} from 'firebase/firestore';
+
+interface Documento {
+  nombre: string;
+  descripcion: string;
+  cantidad: number;
+  imagenUrl?: string;
+  pdfUrl: string;
+  fecha: any;
+}
 
 @Component({
   selector: 'app-listar-documentos',
@@ -9,38 +22,28 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./listar-documentos.page.scss'],
   standalone: false
 })
-export class ListarDocumentosPage {
+export class ListarDocumentosPage implements OnInit {
 
-  documentos: any[] = [];
-  cargando = true;
+  documentos: Documento[] = [];
 
-  storage = getStorage(initializeApp(environment.firebase));
+  constructor(
+    @Inject('firebaseFirestore') private firestore: Firestore
+  ) {}
 
-ionViewWillEnter() {
-  this.cargarDocumentos();
-}
+  async ngOnInit() {
+    const q = query(
+      collection(this.firestore, 'documentos'),
+      orderBy('fecha', 'desc')
+    );
 
-async cargarDocumentos() {
-  this.cargando = true;
-  this.documentos = []; // 🔥 limpiar antes de volver a cargar
+    const snapshot = await getDocs(q);
 
-  try {
-    const carpetaRef = ref(this.storage, 'documentos');
-    const resultado = await listAll(carpetaRef);
-
-    for (const item of resultado.items) {
-      const url = await getDownloadURL(item);
-
-      this.documentos.push({
-        nombre: item.name,
-        url
-      });
-    }
-
-  } catch (error) {
-    console.error('Error cargando documentos:', error);
-  } finally {
-    this.cargando = false;
+    this.documentos = snapshot.docs.map(d =>
+      d.data() as Documento
+    );
   }
-}
+
+  abrirPdf(url: string) {
+    window.open(url, '_blank');
+  }
 }

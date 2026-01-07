@@ -1,7 +1,26 @@
-import { Component } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, Inject } from '@angular/core';
+
+// 🔥 Firestore Firebase PURO
+import {
+  Firestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy
+} from 'firebase/firestore';
+
+// 🔥 Storage Firebase PURO
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
+interface Documento {
+  nombre: string;
+  descripcion: string;
+  imagenUrl?: string;
+  cantidad: number;
+  pdfUrl: string;
+  fecha: any;
+}
 
 @Component({
   selector: 'app-subir-documentos',
@@ -9,53 +28,127 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./subir-documentos.page.scss'],
   standalone: false
 })
-export class SubirDocumentosPage {
+export class SubirDocumentosPage implements OnInit {
 
-  progreso = 0;
-  subiendo = false;
-  mensaje = '';
-  archivoSeleccionado: File | null = null;
+    modalOpen: boolean = false;
+  
+  // 🔹 Formulario
+  nombre: string = '';
+  descripcion: string = '';
+  cantidad: number = 1;
+  cargando: boolean = false;
 
-  storage = getStorage(initializeApp(environment.firebase));
+  imagenFile?: File;
+  pdfFile?: File;
 
-  seleccionarArchivo(event: any) {
-    this.archivoSeleccionado = event.target.files[0];
+  // 🔹 Listado
+  documentos: Documento[] = [];
+
+  // 🔹 Storage
+  storage = getStorage();
+
+  constructor(
+    @Inject('firebaseFirestore') private firestore: Firestore
+  ) {}
+
+  async ngOnInit() {
+    await this.cargarDocumentos();
   }
 
-  subirArchivo() {
-    if (!this.archivoSeleccionado) {
-      this.mensaje = 'Selecciona un archivo primero';
+  // ==========================
+  // 📂 Selección de archivos
+  // ==========================
+  seleccionarImagen(event: any) {
+    this.imagenFile = event.target.files[0];
+  }
+
+  seleccionarPdf(event: any) {
+    this.pdfFile = event.target.files[0];
+  }
+
+  // ==========================
+  // ⬆️ Subir documento
+  // ==========================
+  async subirDocumento() {
+    if (!this.nombre || !this.pdfFile) {
+      alert('El nombre y el PDF son obligatorios');
       return;
     }
 
-    const ruta = `documentos/${Date.now()}_${this.archivoSeleccionado.name}`;
-    const storageRef = ref(this.storage, ruta);
+    this.cargando = true;
 
-    const uploadTask = uploadBytesResumable(storageRef, this.archivoSeleccionado);
+    try {
+      let imagenUrl = '';
 
-    this.subiendo = true;
-    this.progreso = 0;
-    this.mensaje = 'Subiendo archivo...';
-
-    uploadTask.on(
-      'state_changed',
-      snapshot => {
-        this.progreso = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      // 🔹 Subir imagen (opcional)
+      if (this.imagenFile) {
+        const imagenRef = ref(
+          this.storage,
+          `imagenes/${Date.now()}_${this.imagenFile.name}`
         );
-      },
-      error => {
-        console.error(error);
-        this.mensaje = 'Error al subir el archivo';
-        this.subiendo = false;
-      },
-      async () => {
-        const url = await getDownloadURL(uploadTask.snapshot.ref);
-        this.mensaje = '✅ Archivo subido correctamente';
-        this.subiendo = false;
-
-        console.log('URL del archivo:', url);
+        await uploadBytes(imagenRef, this.imagenFile);
+        imagenUrl = await getDownloadURL(imagenRef);
       }
+
+      // 🔹 Subir PDF
+      const pdfRef = ref(
+        this.storage,
+        `documentos/${Date.now()}_${this.pdfFile.name}`
+      );
+      await uploadBytes(pdfRef, this.pdfFile);
+      const pdfUrl = await getDownloadURL(pdfRef);
+
+      // 🔹 Guardar en Firestore
+await addDoc(collection(this.firestore, 'documentos'), {
+  nombre: this.nombre,
+  descripcion: this.descripcion,
+  cantidad: this.cantidad,
+  imagenUrl,
+  pdfUrl,
+  fecha: new Date()
+});
+
+this.cantidad = 1;
+
+      alert('Documento subido correctamente ✅');
+
+      // 🔹 Limpiar formulario
+      this.nombre = '';
+      this.descripcion = '';
+      this.imagenFile = undefined;
+      this.pdfFile = undefined;
+
+      // 🔹 Recargar lista
+      await this.cargarDocumentos();
+
+    } catch (error) {
+      console.error('Error al subir:', error);
+      alert('Error al subir documento');
+    } finally {
+      this.cargando = false;
+    }
+  }
+
+  // ==========================
+  // 📋 Cargar documentos
+  // ==========================
+  async cargarDocumentos() {
+    const q = query(
+      collection(this.firestore, 'documentos'),
+      orderBy('fecha', 'desc')
     );
+
+    const snapshot = await getDocs(q);
+
+    this.documentos = snapshot.docs.map(doc => ({
+      ...(doc.data() as Documento)
+    }));
+  }
+
+  // ==========================
+  // 📄 Abrir PDF
+  // ==========================
+  abrirPdf(url: string) {
+    window.open(url, '_blank');
   }
 }
