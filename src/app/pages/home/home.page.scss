@@ -1,165 +1,493 @@
 @import "~swiper/swiper-bundle.min.css";
 
+// :host {
+//   --ion-background-color: #f0f8ff; /* color de fondo de toda la página */
+// }
+
+// ion-content {
+//   --background: #fff8ef; /* color de contenido específicamente */
+// }
+// /* en tu home.page.scss o styles.scss */
+// .menu-title {
+//   color: #000000;
+//     font-size: 1.2rem;      /* Aumenta tamaño del texto */
+// /* negro puro */
+// }
+
+// .menu-content {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-end; /* Alinea los botones al inicio, no centrados */
+// }
+
+// .menu-btn {
+//   font-size: 1.2rem;      /* Aumenta tamaño del texto */
+//   height: 50px;            /* Botones más altos */   /* Espacio izquierdo más amplio */     /* Espacio derecho */
+//   color: #000000;
+//   align-items: start;    /* Separación entre botones */
+// }
+
+// .ion-button{
+//     color: #000000;
+// }
+
+// .cards-container {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: stretch;
+//   width: 100%;
+//   gap: 10px;
+// }
+
+// ion-card {
+//   flex: 1;
+//   min-width: 0;
+//   color: white; /* Texto en blanco para resaltar */
+// }
+
+// ion-card img {
+//   width: 100%;
+//   height: 120px;
+//   object-fit: contain;
+// }
+
+// /* Colores por tarjeta */
+// .card-red {
+//   background-color: #e74c3c; /* Rojo */
+// }
+
+// .card-green {
+//   background-color: #2ecc71; /* Verde */
+// }
+
+// .card-blue {
+//   background-color: #3498db; /* Azul */
+// }
+
+// .video-header {
+//   width: 100%;
+//   height: 400px; /* Ajusta según quieras más alto */
+//   overflow: hidden;
+// }
+
+// .video-header video {
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover; /* Hace que el video cubra todo el contenedor */
+// }
+
+
+// .info-grid {
+//   padding: 0;
+//   margin: 0;
+// }
+
+// /* Fila sin separación entre columnas */
+// .tight-row {
+//   --ion-grid-column-padding: 0;
+//   margin-left: 0;
+//   margin-right: 0;
+// }
+
+// /* Columnas con padding mínimo */
+// .image-col, .text-col {
+//   padding: 0 5px; /* ajustable */
+// }
+
+// /* Imágenes que ocupan toda la columna */
+// .image-col img {
+//   width: 85%;
+//   height: auto;
+//   display: block;
+// }
+
+// /* Títulos y textos compactos */
+// .title {
+//   font-size: 1.8rem;
+//   margin-bottom: 5px;
+//   color: #000000;
+// }
+
+// .text {
+//   font-size: 1.4rem;
+//   line-height: 1.4;
+//   margin-bottom: 5px;
+//   color: #000000;
+// }
+
+// /* Opcional: ajustar texto en móviles */
+// @media (max-width: 767px) {
+//   .title {
+//     font-size: 1.5rem;
+//   }
+//   .text {
+//     font-size: 0.95rem;
+//   }
+// }
+
+// .info-grid {
+//   margin-top: 40px;
+// }
+
+// .image-col img {
+//   width: 100%;
+//   border-radius: 12px;
+//   object-fit: cover;
+// }
+
+// .text-col {
+//   padding: 10px 20px;
+// }
+
+// .benefits-list {
+//   list-style: none;
+//   padding-left: 0;
+// }
+
+// .benefits-list li {
+//   margin-bottom: 12px;
+//   font-size: 16px;
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
+// }
+
+// .responsive-row {
+//   row-gap: 20px;
+// }
+
+/* =========================
+   VARIABLES GLOBALES (TECH)
+========================= */
 :host {
-  --ion-background-color: #f0f8ff; /* color de fondo de toda la página */
+  --ion-background-color: #f5f7fa;
+  --primary-color: #22c55e;
+  --text-color: #1f2933;
+  --muted-text: #6b7280;
 }
 
+/* =========================
+   CONTENIDO GENERAL
+========================= */
 ion-content {
-  --background: #fff8ef; /* color de contenido específicamente */
-}
-/* en tu home.page.scss o styles.scss */
-.menu-title {
-  color: #000000; 
-    font-size: 1.2rem;      /* Aumenta tamaño del texto */
-/* negro puro */
+  --background: #f5f7fa;
 }
 
-.menu-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Alinea los botones al inicio, no centrados */
+/* =========================
+   HEADER
+========================= */
+ion-toolbar {
+  --background: #ffffff;
+  --color: var(--text-color);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
-.menu-btn {
-  font-size: 1.2rem;      /* Aumenta tamaño del texto */
-  height: 50px;            /* Botones más altos */   /* Espacio izquierdo más amplio */     /* Espacio derecho */
-  color: #000000;
-  align-items: start;    /* Separación entre botones */
-}
-
-.ion-button{
-    color: #000000;
-}
-
-.cards-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  width: 100%;
-  gap: 10px;
-}
-
-ion-card {
-  flex: 1;
-  min-width: 0;
-  color: white; /* Texto en blanco para resaltar */
-}
-
-ion-card img {
-  width: 100%;
-  height: 120px;
-  object-fit: contain;
-}
-
-/* Colores por tarjeta */
-.card-red {
-  background-color: #e74c3c; /* Rojo */
-}
-
-.card-green {
-  background-color: #2ecc71; /* Verde */
-}
-
-.card-blue {
-  background-color: #3498db; /* Azul */
-}
-
+/* =========================
+   VIDEO HERO
+========================= */
 .video-header {
   width: 100%;
-  height: 400px; /* Ajusta según quieras más alto */
+  height: 320px;
   overflow: hidden;
+  border-radius: 0 0 28px 28px;
 }
 
 .video-header video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Hace que el video cubra todo el contenedor */
-}
-
-
-.info-grid {
-  padding: 0;
-  margin: 0;
-}
-
-/* Fila sin separación entre columnas */
-.tight-row {
-  --ion-grid-column-padding: 0;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* Columnas con padding mínimo */
-.image-col, .text-col {
-  padding: 0 5px; /* ajustable */
-}
-
-/* Imágenes que ocupan toda la columna */
-.image-col img {
-  width: 85%;
-  height: auto;
-  display: block;
-}
-
-/* Títulos y textos compactos */
-.title {
-  font-size: 1.8rem;
-  margin-bottom: 5px;
-  color: #000000;
-}
-
-.text {
-  font-size: 1.4rem;
-  line-height: 1.4;
-  margin-bottom: 5px;
-  color: #000000;
-}
-
-/* Opcional: ajustar texto en móviles */
-@media (max-width: 767px) {
-  .title {
-    font-size: 1.5rem;
-  }
-  .text {
-    font-size: 0.95rem;
-  }
-}
-
-.info-grid {
-  margin-top: 40px;
-}
-
-.image-col img {
-  width: 100%;
-  border-radius: 12px;
   object-fit: cover;
 }
 
-.text-col {
-  padding: 10px 20px;
+/* =========================
+   ANIMACIONES
+========================= */
+.fade-in {
+  animation: fadeUp 0.8s ease-out both;
 }
 
-.benefits-list {
-  list-style: none;
-  padding-left: 0;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.benefits-list li {
-  margin-bottom: 12px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* =========================
+   GRID GENERAL
+========================= */
+.info-grid {
+  margin-top: 64px;
+  padding: 0 16px;
 }
 
 .responsive-row {
-  row-gap: 20px;
+  row-gap: 32px;
 }
 
+/* =========================
+   IMÁGENES
+========================= */
+.image-col img {
+  width: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   TARJETAS TECH
+========================= */
+ion-card {
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+ion-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+ion-card-subtitle {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+}
+
+ion-card-content {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted-text);
+}
+
+/* =========================
+   TEXTO NORMAL
+========================= */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted-text);
+}
+
+/* =========================
+   BENEFICIOS
+========================= */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  background: #f0fdf4;
+  border-left: 4px solid var(--primary-color);
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-stack ion-card {
+  margin: 16px;
+  border-radius: 16px;
+}
+
+.mobile-stack img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+/* =========================
+   LEER MÁS (SOLO MÓVIL)
+========================= */
+@media (max-width: 767px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+
+  .collapsed {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    /* estándar */
+    overflow: hidden;
+  }
+
+  .read-more-btn {
+    --color: var(--primary-color);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: none;
+    margin-top: 8px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .read-more-btn::after {
+    content: '→';
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .read-more-btn[aria-expanded='true']::after {
+    transform: rotate(180deg);
+  }
+}
+
+/* =========================
+   VISIBILIDAD WEB / MÓVIL
+========================= */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+/* =========================
+CARDS MÓVIL
+========================= */
+.card-header-custom {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+}
+
+.benefits-list li.hidden {
+  display: none;
+}
+
+.expandable-text {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.expandable-text.collapsed {
+  max-height: 6.5em;
+  opacity: 0.85;
+}
+
+.expandable-text.expanded {
+  max-height: 1000px;
+}
+
+ion-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+ion-card:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+CARDS MÓVIL
+========================= */
 
 
+/* =========================
+   SWIPER SOLO MÓVIL
+========================= */
+// .mobile-swiper {
+//   display: none;
+// }
 
+// @media (max-width: 768px) {
+//   .mobile-swiper {
+//     display: block;
+//   }
 
+//   .desktop-only {
+//     display: none;
+//   }
 
+//   .mobile-only {
+//     display: block;
+//   }
 
+//   .video-header {
+//     height: 220px;
+//   }
+
+//   .title {
+//     font-size: 1.6rem;
+//   }
+
+//   ion-card-title {
+//     font-size: 1.2rem;
+//   }
+// }
+
+/* =========================
+   DARK MODE
+========================= */
+// @media (prefers-color-scheme: dark) {
+//   :host {
+//     --ion-background-color: #020617;
+//   }
+
+//   ion-content {
+//     --background: #020617;
+//   }
+
+//   ion-toolbar {
+//     --background: #020617;
+//     --color: #e5e7eb;
+//   }
+
+//   ion-card {
+//     background: #020617;
+//     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+//   }
+
+//   ion-card-title,
+//   .title {
+//     color: #e5e7eb;
+//   }
+
+//   ion-card-content,
+//   .text {
+//     color: #9ca3af;
+//   }
+
+//   .benefits-list li {
+//     background: #020617;
+//     border-left-color: var(--primary-color);
+//   }
+// }

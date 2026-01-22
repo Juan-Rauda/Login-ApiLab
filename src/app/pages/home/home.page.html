@@ -7,138 +7,300 @@
   </ion-toolbar>
 </ion-header>
 
-  <!-- UN solo ion-content para toda la página -->
-  <ion-content>
+<!-- UN solo ion-content para toda la página -->
+<ion-content>
 
-    <!-- Video -->
-    <div class="video-wrapper">
-       <div class="video-header">
+  <!-- Video -->
+  <div class="video-wrapper">
+    <div class="video-header">
       <video muted autoplay loop playsinline>
         <source src="assets/videouls.mp4" type="video/mp4">
         Tu navegador no soporta el video.
       </video>
     </div>
-    </div>
+  </div>
 
-    <!-- Espaciado -->
-    <br><br>
+  <!-- Espaciado -->
+  <br><br>
 
-  <ion-grid class="info-grid">
-    <ion-row class="ion-align-items-center tight-row responsive-row">
-      <ion-col size="12" size-md="5" class="image-col">
-        <img src="https://uls.edu.sv/sitioweb/wp-content/uploads/2024/07/a1-2.png" alt="Facultad" />
-      </ion-col>
-      <ion-col size="12" size-md="7" class="text-col">
-        <ion-card>
-  <ion-card-header>
-    <ion-card-title>Facultad De Ciencias Del Hombre Y La Naturaleza</ion-card-title>
-    <ion-card-subtitle>¿Por qué estudiar Ingeniería Agroecológica en la ULS?</ion-card-subtitle>
-  </ion-card-header>
+  <!-- =================================================
+       ================= DESKTOP / WEB =================
+       ================================================= -->
+  <div class="desktop-only">
 
-  <ion-card-content>
-   La carrera de Ingeniería Agroecológica nació en el año 1992 en la Universidad Luterana Salvadoreña como un enfoque alternativo a la  visión mercantiles que buscaba en ese momento comerciar con la producción de alimentos en el mundo, el modelo llamado "revolución verde", que buscaba imponer un modelo productivista basado en el uso intensivo de agrotóxicos, afectando directamente a la Madre Naturaleza.
+    <!-- Primer grid -->
+    <ion-grid class="info-grid fade-in">
+      <ion-row class="ion-align-items-center responsive-row">
+        <ion-col size="12" size-md="5" class="image-col">
+          <img src="https://uls.edu.sv/sitioweb/wp-content/uploads/2024/07/a1-2.png" alt="Facultad" />
+        </ion-col>
 
-La formación agroecológica es la construcción y aplicación de saberes y prácticas que permitan comprender y resolver los complejos problemas de alimentación y socioambientales de nuestro tiempo, así como construir una nueva racionalidad para transitar hacia un desarrollo sustentable en el planeta.
+        <ion-col size="12" size-md="7" class="text-col">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Facultad De Ciencias Del Hombre Y La Naturaleza</ion-card-title>
+              <ion-card-subtitle>¿Por qué estudiar Ingeniería Agroecológica en la ULS?</ion-card-subtitle>
+            </ion-card-header>
 
-La disciplina científica que enfoca el estudio de la agricultura desde una perspectiva ecológica se denomina «agroecología» y se define como un marco teórico cuyo fin es analizar los procesos agrícolas de manera más amplia. El enfoque agroecológico considera a los ecosistemas agrícolas como las unidades fundamentales de estudio; y en estos sistemas, los ciclos minerales, las transformaciones de la energía, los procesos biológicos y las relaciones socioeconómicas son investigados y analizados como un todo.
-  </ion-card-content>
-</ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            <ion-card-content>
+              La carrera de Ingeniería Agroecológica nació en el año 1992 en la Universidad Luterana Salvadoreña como un
+              enfoque alternativo a la visión mercantiles que buscaba en ese momento comerciar con la producción de
+              alimentos en el mundo, el modelo llamado "revolución verde", que buscaba imponer un modelo productivista
+              basado en el uso intensivo de agrotóxicos, afectando directamente a la Madre Naturaleza.
+              <br /><br />
+              La formación agroecológica es la construcción y aplicación de saberes y prácticas que permitan comprender
+              y
+              resolver los complejos problemas de alimentación y socioambientales de nuestro tiempo, así como construir
+              una nueva racionalidad para transitar hacia un desarrollo sustentable en el planeta.
+              <br /><br />
+              La disciplina científica que enfoca el estudio de la agricultura desde una perspectiva ecológica se
+              denomina «agroecología» y se define como un marco teórico cuyo fin es analizar los procesos agrícolas de
+              manera más
+              amplia.
+              <br /><br />
+              El enfoque agroecológico considera a los ecosistemas agrícolas como las unidades fundamentales de
+              estudio; y en estos sistemas, los ciclos minerales, las transformaciones de la energía, los procesos
+              biológicos y las relaciones socioeconómicas son investigados y analizados como un todo.
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <!-- Segundo grid -->
-  <ion-grid class="info-grid">
-    <ion-row class="ion-align-items-center tight-row responsive-row">
-      <ion-col size="12" size-md="7" class="text-col">
-        <h1 class="title">Facultad de Ciencias del Hombre y la Naturaleza</h1>
-        <p class="text">
-          La carrera de Ingeniería Agroecológica nació en 1992 en la Universidad Luterana Salvadoreña como un enfoque alternativo...
+    <!-- Segundo grid -->
+    <ion-grid class="info-grid fade-in">
+      <ion-row class="ion-align-items-center responsive-row">
+        <ion-col size="12" size-md="7" class="text-col">
+          <h1 class="title">Facultad de Ciencias del Hombre y la Naturaleza</h1>
+
+          <p class="text">
+            La carrera de Ingeniería Agroecológica nació en 1992 en la Universidad Luterana Salvadoreña como un enfoque
+            alternativo sostenible...
+          </p>
+
+          <p class="text">
+            La formación agroecológica integra saberes científicos y sociales
+            para el desarrollo sustentable...
+          </p>
+        </ion-col>
+        <ion-col size="12" size-md="5" class="image-col">
+          <img
+            src="https://eduka.occidente.co/wp-content/uploads/2023/11/Ingenieria-Agroecologica-fundacion-universitaria-de-popayan.jpg"
+            alt="Facultad" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- DESCRIPCIÓN DE LA APP -->
+    <ion-grid class="info-grid fade-in">
+      <ion-row class="ion-align-items-center responsive-row">
+
+        <!-- Imagen -->
+        <ion-col size="12" size-md="5" class="image-col">
+          <img
+            src="https://adlab.com.pe/wp-content/uploads/2024/05/monitoreo-ambiental-lima-peru.jpg"
+            alt="Descripción de la app" />
+        </ion-col>
+
+        <!-- Texto -->
+        <ion-col size="12" size-md="7" class="text-col">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Plataforma Inteligente de Monitoreo Ambiental</ion-card-title>
+              <ion-card-subtitle>Control, análisis y prevención en tiempo real</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <p>
+                Esta aplicación ha sido diseñada para visualizar y monitorear en tiempo real
+                variables ambientales como temperatura, humedad y presencia de gases, a través
+                de sensores conectados a una base de datos en la nube.
+              </p>
+
+              <p>
+                Su objetivo es apoyar la toma de decisiones, mejorar la seguridad y facilitar
+                el control de condiciones críticas dentro de laboratorios, espacios educativos
+                o entornos productivos.
+              </p>
+
+              <p>
+                La plataforma ofrece una interfaz clara, moderna y responsiva, accesible desde
+                distintos dispositivos, permitiendo una supervisión eficiente y centralizada.
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <!-- BENEFICIOS -->
+    <ion-grid class="info-grid fade-in">
+      <ion-row class="ion-align-items-center responsive-row">
+
+        <!-- Imagen -->
+        <ion-col size="12" size-md="5" class="image-col">
+          <img
+            src="https://hazrevista.org/wp-content/uploads/2021/04/apps-medio-ambiente-2021.jpg"
+            alt="Beneficios de la aplicación" />
+        </ion-col>
+
+        <!-- Índice / Beneficios -->
+        <ion-col size="12" size-md="7" class="text-col">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Beneficios de la Aplicación</ion-card-title>
+              <ion-card-subtitle>Ventajas principales del sistema</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ul class="benefits-list">
+                <li>📊 Visualización en tiempo real de sensores ambientales.</li>
+                <li>🚦 Indicadores tipo semáforo para detección rápida de riesgos.</li>
+                <li>📈 Gráficas dinámicas con historial de mediciones.</li>
+                <li>🔔 Apoyo en la prevención de incidentes mediante monitoreo continuo.</li>
+                <li>💻 Acceso desde cualquier dispositivo con interfaz responsiva.</li>
+                <li>⚙️ Integración sencilla con sensores y Firebase.</li>
+                <li>🏫 Ideal para laboratorios, instituciones educativas y proyectos académicos.</li>
+              </ul>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- =================================================
+       ===================== MÓVIL =====================
+       ================================================= -->
+  <div class="mobile-only mobile-stack">
+
+    <!-- <swiper
+      [pagination]="true"
+      [spaceBetween]="16"
+      class="mobile-swiper"
+    > -->
+
+    <!-- SLIDE 1 -->
+    <!-- <ng-template swiperSlide> -->
+    <ion-card class="fade-in">
+      <img src="https://uls.edu.sv/sitioweb/wp-content/uploads/2024/07/a1-2.png">
+
+      <ion-card-header class="card-header-custom">
+        <h2 class="card-title">Facultad De Ciencias Del Hombre Y La Naturaleza</h2>
+        <p class="card-subtitle">¿Por qué estudiar Ingeniería Agroecológica en la ULS?</p>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p class="expandable-text" [ngClass]="{collapsed: !expandedCards[0], expanded: expandedCards[0]}">
+          La carrera de Ingeniería Agroecológica nació en el año 1992 en la Universidad Luterana Salvadoreña como un
+          enfoque alternativo a la visión mercantiles que buscaba en ese momento comerciar con la producción de
+          alimentos en el mundo, el modelo llamado "revolución verde", que buscaba imponer un modelo productivista
+          basado en el uso intensivo de agrotóxicos, afectando directamente a la Madre Naturaleza.
+          <br /><br />
+          La formación agroecológica es la construcción y aplicación de saberes y prácticas que permitan comprender
+          y
+          resolver los complejos problemas de alimentación y socioambientales de nuestro tiempo, así como construir
+          una nueva racionalidad para transitar hacia un desarrollo sustentable en el planeta.
+          <br /><br />
+          La disciplina científica que enfoca el estudio de la agricultura desde una perspectiva ecológica se
+          denomina «agroecología» y se define como un marco teórico cuyo fin es analizar los procesos agrícolas de
+          manera más
+          amplia.
+          <br /><br />
+          El enfoque agroecológico considera a los ecosistemas agrícolas como las unidades fundamentales de
+          estudio; y en estos sistemas, los ciclos minerales, las transformaciones de la energía, los procesos
+          biológicos y las relaciones socioeconómicas son investigados y analizados como un todo.
         </p>
-        <p class="text">
-          La formación agroecológica es la construcción y aplicación de saberes y prácticas que permitan comprender y resolver...
+
+        <ion-button fill="clear" size="small" class="read-more-btn" [attr.aria-expanded]="expandedCards[0]"
+          (click)="toggleCard(0)">
+          {{ expandedCards[0] ? 'Leer menos' : 'Leer más' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <!-- </ng-template> -->
+
+    <!-- Slide/Grid 2 -->
+    <ion-card class="fade-in">
+      <img
+        src="https://eduka.occidente.co/wp-content/uploads/2023/11/Ingenieria-Agroecologica-fundacion-universitaria-de-popayan.jpg">
+
+      <ion-card-header class="card-header-custom">
+        <h2 class="card-title">Facultad De Ciencias Del Hombre Y La Naturaleza</h2>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p class="expandable-text" [ngClass]="{collapsed: !expandedCards[1], expanded: expandedCards[1]}">
+          La carrera de Ingeniería Agroecológica nació en 1992 en la Universidad Luterana Salvadoreña como un enfoque
+          alternativo sostenible...
+          <br /><br />
+          La formación agroecológica integra saberes científicos y sociales
+          para el desarrollo sustentable...
         </p>
-      </ion-col>
-      <ion-col size="12" size-md="5" class="image-col">
-        <img src="https://scontent.fsal14-1.fna.fbcdn.net/v/t39.30808-6/486187350_1061942532641905_6393317126611313820_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGvw8f6mMFXl--ZufX5adeqFyIKShSXMmwXIgpKFJcybKE74clCuWs-Be78gVYKywrsXvjRa4C8ksOcHAsbW8ag&_nc_ohc=kuudOShAKpEQ7kNvwEYyI6E&_nc_oc=AdlAt5d_47M2BUd8zcBaGtGbgXKLz3XA5nJxdrDoRpvEfZd_TcVTMBkd4CD_VT1jqmU&_nc_zt=23&_nc_ht=scontent.fsal14-1.fna&_nc_gid=hNBDkjLo-k0dqI1R0i9ScA&oh=00_AfpjHb2HiqVo9_KtaHZDUQtx-JBdCTdE5Dj8rDY9AX4SlQ&oe=695DE27C" alt="Facultad" />
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 
-  <!-- DESCRIPCIÓN DE LA APP -->
-<ion-grid class="info-grid">
-  <ion-row class="ion-align-items-center responsive-row">
+        <ion-button fill="clear" size="small" class="read-more-btn" [attr.aria-expanded]="expandedCards[1]"
+          (click)="toggleCard(1)">
+          {{ expandedCards[1] ? 'Leer menos' : 'Leer más' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
 
-    <!-- Imagen -->
-    <ion-col size="12" size-md="5" class="image-col">
-      <img src="https://scontent.fsal14-1.fna.fbcdn.net/v/t39.30808-6/542761580_1193414609494696_6359329434430512574_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFHP9bybF5to0fXwk2V9h4IwxeTzad-3TXDF5PNp37dNRkyZMtMUZ9i7WcUKhS9RJFQ5fai_EqxYmtrgZLBMoEa&_nc_ohc=Xlr1LLTwTyAQ7kNvwHAetSV&_nc_oc=AdlGgW1UDQT3vxae0-hsrENmZ1ZVs5Tqc2_flXIDRriI0UWnfIgSMMeNq8vMigs7rTw&_nc_zt=23&_nc_ht=scontent.fsal14-1.fna&_nc_gid=4iZ0KgHD7sNxuAhaVuO9gA&oh=00_AfpfE-aUupo1SX02d546SXyz0h0RBnkrM-1nmUgcEATVXw&oe=695DCFD9" alt="Descripción de la app" />
-    </ion-col>
+    <!-- SLIDE 2 -->
+    <!-- <ng-template swiperSlide> -->
+    <ion-card class="fade-in">
+      <img src="https://adlab.com.pe/wp-content/uploads/2024/05/monitoreo-ambiental-lima-peru.jpg">
+      <ion-card-header class="card-header-custom">
+        <h2 class="card-title">Plataforma Inteligente de Monitoreo Ambiental</h2>
+        <p class="card-subtitle">Control, análisis y prevención en tiempo real</p>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="expandable-text" [ngClass]="{collapsed: !expandedCards[2], expanded: expandedCards[2]}">
+          Esta aplicación ha sido diseñada para visualizar y monitorear en tiempo real
+          variables ambientales como temperatura, humedad y presencia de gases, a través
+          de sensores conectados a una base de datos en la nube.
+          <br /><br />
+          Su objetivo es apoyar la toma de decisiones, mejorar la seguridad y facilitar
+          el control de condiciones críticas dentro de laboratorios, espacios educativos
+          o entornos productivos.
+        </p>
 
-    <!-- Texto -->
-    <ion-col size="12" size-md="7" class="text-col">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Plataforma Inteligente de Monitoreo Ambiental</ion-card-title>
-          <ion-card-subtitle>Control, análisis y prevención en tiempo real</ion-card-subtitle>
-        </ion-card-header>
+        <ion-button fill="clear" size="small" class="read-more-btn" [attr.aria-expanded]="expandedCards[2]"
+          (click)="toggleCard(2)">
+          {{ expandedCards[2] ? 'Leer menos' : 'Leer más' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <!-- </ng-template> -->
 
-        <ion-card-content>
-          <p>
-            Esta aplicación ha sido diseñada para visualizar y monitorear en tiempo real
-            variables ambientales como temperatura, humedad y presencia de gases, a través
-            de sensores conectados a una base de datos en la nube.
-          </p>
+    <!-- SLIDE 3 -->
+    <!-- <ng-template swiperSlide> -->
+    <ion-card class="fade-in">
+      <img src="https://hazrevista.org/wp-content/uploads/2021/04/apps-medio-ambiente-2021.jpg">
 
-          <p>
-            Su objetivo es apoyar la toma de decisiones, mejorar la seguridad y facilitar
-            el control de condiciones críticas dentro de laboratorios, espacios educativos
-            o entornos productivos.
-          </p>
+      <ion-card-header>
+        <ion-card-title>Beneficios de la Aplicación</ion-card-title>
+        <ion-card-subtitle>Ventajas principales del sistema</ion-card-subtitle>
+      </ion-card-header>
 
-          <p>
-            La plataforma ofrece una interfaz clara, moderna y responsiva, accesible desde
-            distintos dispositivos, permitiendo una supervisión eficiente y centralizada.
-          </p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
+      <ion-card-content>
+        <ul class="benefits-list">
+          <li *ngFor="let item of benefits; let i = index" [class.hidden]="!expandedCards[3] && i >= 3">
+            {{ item }}
+          </li>
+        </ul>
 
-  </ion-row>
-</ion-grid>
+        <ion-button fill="clear" size="small" class="read-more-btn" [attr.aria-expanded]="expandedCards[3]"
+          (click)="toggleCard(3)">
+          {{ expandedCards[3] ? 'Ver menos beneficios' : 'Ver más beneficios' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <!-- </ng-template> -->
 
-<!-- BENEFICIOS -->
-<ion-grid class="info-grid">
-  <ion-row class="ion-align-items-center responsive-row">
+    <!-- </swiper> -->
 
-    <!-- Imagen -->
-    <ion-col size="12" size-md="5" class="image-col">
-      <img src="https://scontent.fsal14-1.fna.fbcdn.net/v/t39.30808-6/486181535_1062600909242734_259851957682349938_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEB-oQNIj6rW7rvqwLYFpJJgJsc7fM-EJ6Amxzt8z4QnqMSuzRSc18TNxGmHNOab6J3KuLZ-ajzCG7BlVkUwTsU&_nc_ohc=H68q4p0wMxwQ7kNvwFdUITs&_nc_oc=Adk2DFtFstIFCgvXmXULH3mtuleelajjQYMPyh_t0pF8iwu2lN_5b3u45J7J3xfx7Gc&_nc_zt=23&_nc_ht=scontent.fsal14-1.fna&_nc_gid=fpYUZW2z_t3ETK7ZpHYJlg&oh=00_AfoLyJxXJiBa3apCDJfDcfghSzjK97sL5_yMTknHHcr1Kw&oe=695DAA54" alt="Beneficios de la aplicación" />
-    </ion-col>
+  </div>
 
-    <!-- Índice / Beneficios -->
-    <ion-col size="12" size-md="7" class="text-col">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Beneficios de la Aplicación</ion-card-title>
-          <ion-card-subtitle>Ventajas principales del sistema</ion-card-subtitle>
-        </ion-card-header>
-
-        <ion-card-content>
-          <ul class="benefits-list">
-            <li>📊 Visualización en tiempo real de sensores ambientales.</li>
-            <li>🚦 Indicadores tipo semáforo para detección rápida de riesgos.</li>
-            <li>📈 Gráficas dinámicas con historial de mediciones.</li>
-            <li>🔔 Apoyo en la prevención de incidentes mediante monitoreo continuo.</li>
-            <li>💻 Acceso desde cualquier dispositivo con interfaz responsiva.</li>
-            <li>⚙️ Integración sencilla con sensores y Firebase.</li>
-            <li>🏫 Ideal para laboratorios, instituciones educativas y proyectos académicos.</li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-
-  </ion-row>
-</ion-grid>
-
-
-  </ion-content>
+</ion-content>

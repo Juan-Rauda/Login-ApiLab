@@ -32,7 +32,7 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
- @import "@ionic/angular/css/palettes/dark.always.css"; 
+ @import "@ionic/angular/css/palettes/dark.always.css";
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
@@ -53,17 +53,17 @@ ion-button{
     justify-content: center;
     align-items: center;
   }
-  
+
   .auth-form {
     width: 100%;
     text-align: center;
     padding: 20px;
   }
-  
+
   .gradient-input{
     text-align: start;
     padding: 10px 0;
-  
+
     .input {
       position: relative;
       background: linear-gradient(21deg, var(--ion-color-primary),  var(--ion-color-secondary));
@@ -74,14 +74,14 @@ ion-button{
       height: 55px;
       margin-top: 5px;
     }
-  
+
     .input *:not(span) {
       padding: 0 0.325em;
     }
     ion-label{
       padding: 10px;
     }
-    
+
     ion-input {
       font-family: inherit;
       line-height: inherit;
@@ -94,9 +94,9 @@ ion-button{
       --highlight-height: 0;
       --highlight-color-focused: #cecece;
     }
-  
+
   }
-  
+
  .gradient-btn{
     margin-top: 35px;
     --background: linear-gradient(21deg, var(--ion-color-primary),  var(--ion-color-secondary));

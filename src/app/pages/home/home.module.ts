@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { SwiperModule } from 'swiper/angular';
+// import { SwiperModule } from 'swiper/angular';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 
 import { HomePageRoutingModule } from './home-routing.module';
@@ -18,7 +18,7 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
     ReactiveFormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SwiperModule 
+    // SwiperModule
   ],
   declarations: [HomePage]
 })
