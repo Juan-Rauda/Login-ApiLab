@@ -4,3 +4,24 @@
     display: none;
   }
 }
+
+.forgot-password {
+  color: #facc15;
+  cursor: pointer;
+  // font-size: 0.9rem;
+  font-weight: 500;
+  // margin-top: 8px;
+  // display: inline-block;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+.forgot-password.disabled {
+  color: #9ca3af;          // gris
+  cursor: not-allowed;
+  pointer-events: none;   // 🔒 bloquea clics
+  text-decoration: none;
+}

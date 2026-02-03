@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-auth',
@@ -13,17 +14,23 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 //definimos el formulario en solo dos campos
 export class AuthPage implements OnInit {
 
+  emailVerified = false;
+  showResendButton = false;
+
   form = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.required])
   });
 
-  isRegister = false; // nos sirve para saber si el usuario esta en forma login (false) o el registro (true)
   auth = getAuth(); //inicializamos firebase auth
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   //nuestra funcion principal donde verificamos si el formulario es valido
   async submit() {
@@ -32,30 +39,144 @@ export class AuthPage implements OnInit {
     const { email, password } = this.form.value;
 
     try {
-      if (this.isRegister) {
-        // esta funcion nos dice que si isRegister es true llamaremos a la funcion CreateuserWithEmailAndPassword
-        //lo que nos registrara un usuario
-        await createUserWithEmailAndPassword(this.auth, email!, password!);
-        console.log('✅ Usuario registrado');
-      } else {
-        // de lo contracio que IsRegister es false Llamaremos a la funcion SingIn.... lo que logueara al usuario existente
-        await signInWithEmailAndPassword(this.auth, email!, password!);
-        console.log('✅ Usuario logueado');
+      const userCredential = await signInWithEmailAndPassword(
+        this.auth,
+        email!,
+        password!
+      );
+
+      const user = userCredential.user;
+
+      // 🔄 fuerza actualización desde Firebase
+      await user.reload();
+
+      this.emailVerified = user.emailVerified;
+
+      // VERIFICACIÓN DE CORREO
+      if (!user.emailVerified) {
+        this.showResendButton = true;
+        this.showToast(
+          'Verifica tu correo antes de iniciar sesión',
+          'warning'
+        );
+        return;
       }
 
-      this.router.navigateByUrl('/home'); // si todo se cumple de manera correcta nos redirecciona a Home (temporalmente)
+      // LOGIN OK/TOAST DE BIENVENIDA
+      this.showResendButton = false;
+      this.showToast('Bienvenido a Apilab 👋', 'success');
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+
     } catch (err: any) {
-      console.error('❌ Error en auth:', err.message);// mensaje de error
-      alert('Error: ' + err.message);
+      const message = this.getFirebaseErrorMessage(err.code);
+      this.showToast(message, 'danger');
     }
   }
 
-    goToRegister() { //enrutamiento a la pagina register
-    this.router.navigateByUrl('/register');
+  async resendVerificationEmail() {
+    const user = this.auth.currentUser;
+
+    if (!user) {
+      this.showToast('No hay sesión activa', 'danger');
+      return;
+    }
+
+    if (user.emailVerified) {
+      this.emailVerified = true;
+      this.showToast('Tu correo ya está verificado', 'success');
+      return;
+    }
+
+    try {
+      await sendEmailVerification(user);
+      this.showToast(
+        'Correo de verificación reenviado. Revisa tu spam 📩',
+        'success'
+      );
+    } catch (error) {
+      this.showToast(
+        'No se pudo reenviar el correo. Intenta más tarde',
+        'danger'
+      );
+    }
   }
 
-  toggleMode() { //funcion para alternar entre registro a login
-    this.isRegister = !this.isRegister; 
+  async resetPassword() {
+    const email = this.form.value.email;
+
+    if (!email) {
+      this.showToast(
+        'Ingresa tu correo para recuperar la contraseña',
+        'warning'
+      );
+      return;
+    }
+
+    const alert = await this.alertCtrl.create({
+      header: '¿Recuperar contraseña?',
+      message: `
+      Se enviará un correo de recuperación a:\n\n${email}
+    `,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Enviar',
+          handler: async () => {
+            try {
+              await sendPasswordResetEmail(this.auth, email);
+              this.showToast(
+                'Correo de recuperación enviado 📩',
+                'success'
+              );
+            } catch (error: any) {
+              this.showToast(
+                this.getFirebaseErrorMessage(error.code),
+                'danger'
+              );
+            }
+          }
+        }
+      ],
+      cssClass: 'confirm-alert'
+    });
+
+    await alert.present();
+  }
+
+  async showToast(
+    message: string,
+    color: 'success' | 'danger' | 'warning' | 'dark' = 'danger'
+  ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 3000,
+      position: 'top',
+      color,
+      cssClass: 'custom-toast outlined-toast',
+      buttons: [{ icon: 'close', role: 'cancel' }]
+    });
+
+    await toast.present();
+  }
+
+  getFirebaseErrorMessage(code: string): string {
+    switch (code) {
+      case 'auth/invalid-credential':
+        return 'Correo o contraseña incorrectos.';
+      case 'auth/invalid-email':
+        return 'El correo ingresado no es válido.';
+      case 'auth/network-request-failed':
+        return 'Error de conexión. Intenta de nuevo.';
+      default:
+        return 'Ocurrió un error inesperado.';
+    }
+  }
+
+  goToRegister() { //enrutamiento a la pagina register
+    this.router.navigateByUrl('/register');
   }
 }
 
