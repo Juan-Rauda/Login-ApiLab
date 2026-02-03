@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { getAuth, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
-import { ToastController, AlertController } from '@ionic/angular';
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signOut } from "firebase/auth";
+import { ToastController, AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-auth',
@@ -16,6 +16,7 @@ export class AuthPage implements OnInit {
 
   emailVerified = false;
   showResendButton = false;
+  loading = false;
 
   form = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -27,16 +28,27 @@ export class AuthPage implements OnInit {
   constructor(
     private router: Router,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() { }
 
   //nuestra funcion principal donde verificamos si el formulario es valido
   async submit() {
+    if (this.loading) return;
     if (!this.form.valid) return;
 
     const { email, password } = this.form.value;
+    this.loading = true;
+
+    const loader = await this.loadingCtrl.create({
+      message: 'Iniciando sesión...',
+      spinner: 'crescent',
+      backdropDismiss: false
+    });
+
+    await loader.present();
 
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -46,15 +58,19 @@ export class AuthPage implements OnInit {
       );
 
       const user = userCredential.user;
-
-      // 🔄 fuerza actualización desde Firebase
       await user.reload();
 
       this.emailVerified = user.emailVerified;
 
-      // VERIFICACIÓN DE CORREO
+
       if (!user.emailVerified) {
         this.showResendButton = true;
+
+        // 🚨 CIERRA SESIÓN AQUÍ
+        await signOut(this.auth);
+
+        await loader.dismiss();
+        
         this.showToast(
           'Verifica tu correo antes de iniciar sesión',
           'warning'
@@ -62,7 +78,6 @@ export class AuthPage implements OnInit {
         return;
       }
 
-      // LOGIN OK/TOAST DE BIENVENIDA
       this.showResendButton = false;
       this.showToast('Bienvenido a Apilab 👋', 'success');
       this.router.navigateByUrl('/home', { replaceUrl: true });
@@ -70,6 +85,10 @@ export class AuthPage implements OnInit {
     } catch (err: any) {
       const message = this.getFirebaseErrorMessage(err.code);
       this.showToast(message, 'danger');
+
+    } finally {
+      this.loading = false;
+      await loader.dismiss();
     }
   }
 
@@ -170,6 +189,10 @@ export class AuthPage implements OnInit {
         return 'El correo ingresado no es válido.';
       case 'auth/network-request-failed':
         return 'Error de conexión. Intenta de nuevo.';
+      case 'auth/too-many-requests':
+        return 'Demasiados intentos. Espera un momento e intenta de nuevo.';
+      case 'auth/internal-error':
+        return 'Firebase está ocupado. Intenta en unos segundos.';
       default:
         return 'Ocurrió un error inesperado.';
     }

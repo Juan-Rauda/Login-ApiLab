@@ -27,11 +27,11 @@ export class AuthService {
     return !!this.auth.currentUser;
   }
 
-  isAuthenticated(): Promise<boolean> {
+  getCurrentUser(): Promise<User | null> {
     return new Promise(resolve => {
       const unsubscribe = onAuthStateChanged(this.auth, user => {
         unsubscribe();
-        resolve(!!user);
+        resolve(user);
       });
     });
   }

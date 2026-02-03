@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { ToastController } from '@ionic/angular';
-import { sendEmailVerification } from 'firebase/auth';
+import { sendEmailVerification, signOut  } from 'firebase/auth';
 
 @Component({
   selector: 'app-register',
@@ -57,6 +57,8 @@ export class RegisterPage implements OnInit {
 
       // ENVÍO DE CORREO DE VERIFICACIÓN
       await sendEmailVerification(userCredential.user);
+
+      await signOut(this.auth);
 
       this.showToast(
         'Cuenta creada. Revisa tu correo para verificarla',
