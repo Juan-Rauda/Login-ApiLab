@@ -18,4 +18,8 @@ export class AuthService {
   login(email: string, password: string) { return signInWithEmailAndPassword(this.auth, email, password); }
   register(email: string, password: string) { return createUserWithEmailAndPassword(this.auth, email, password); }
   logout() { return signOut(this.auth); }
+
+  isLoggedIn(): boolean {
+  return !!localStorage.getItem('token');
+}
 }
