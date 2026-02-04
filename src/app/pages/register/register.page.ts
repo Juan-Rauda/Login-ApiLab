@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { ToastController } from '@ionic/angular';
-import { sendEmailVerification, signOut  } from 'firebase/auth';
+import { sendEmailVerification, signOut } from 'firebase/auth';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +13,7 @@ import { sendEmailVerification, signOut  } from 'firebase/auth';
 })
 export class RegisterPage implements OnInit {
 
+  loading = false;
 
   //definicion de campos para el registrer  
   form = new FormGroup({
@@ -31,6 +32,7 @@ export class RegisterPage implements OnInit {
   ngOnInit() { }
 
   async register() {
+    if (this.loading) return;
     if (!this.form.valid) {
       this.showToast('Completa todos los campos correctamente', 'warning');
       return;
@@ -47,6 +49,8 @@ export class RegisterPage implements OnInit {
       this.showToast('Usa un correo electrónico válido', 'warning');
       return;
     }
+
+    this.loading = true;
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -77,6 +81,8 @@ export class RegisterPage implements OnInit {
       }
 
       this.showToast(message, 'danger');
+    } finally {
+      this.loading = false;
     }
   }
 

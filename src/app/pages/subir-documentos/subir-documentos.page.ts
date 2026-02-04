@@ -1,4 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { getAuth } from 'firebase/auth';
+import { ToastController } from '@ionic/angular';
 
 // 🔥 Firestore Firebase PURO
 import {
@@ -30,8 +32,8 @@ interface Documento {
 })
 export class SubirDocumentosPage implements OnInit {
 
-    modalOpen: boolean = false;
-  
+  modalOpen: boolean = false;
+
   // 🔹 Formulario
   nombre: string = '';
   descripcion: string = '';
@@ -48,8 +50,9 @@ export class SubirDocumentosPage implements OnInit {
   storage = getStorage();
 
   constructor(
-    @Inject('firebaseFirestore') private firestore: Firestore
-  ) {}
+    @Inject('firebaseFirestore') private firestore: Firestore,
+    private toastCtrl: ToastController
+  ) { }
 
   async ngOnInit() {
     await this.cargarDocumentos();
@@ -71,13 +74,37 @@ export class SubirDocumentosPage implements OnInit {
   // ==========================
   async subirDocumento() {
     if (!this.nombre || !this.pdfFile) {
-      alert('El nombre y el PDF son obligatorios');
+      this.showToast(
+        'El nombre y el PDF son obligatorios',
+        'warning'
+      );
       return;
     }
 
     this.cargando = true;
 
     try {
+
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      // 🔐 VALIDACIONES DE SEGURIDAD
+      if (!user) {
+        this.showToast(
+          'Debes iniciar sesión para subir documentos',
+          'danger'
+        );
+        return;
+      }
+
+      if (!user.emailVerified) {
+        this.showToast(
+          'Debes verificar tu correo antes de subir documentos',
+          'warning'
+        );
+        return;
+      }
+
       let imagenUrl = '';
 
       // 🔹 Subir imagen (opcional)
@@ -99,34 +126,56 @@ export class SubirDocumentosPage implements OnInit {
       const pdfUrl = await getDownloadURL(pdfRef);
 
       // 🔹 Guardar en Firestore
-await addDoc(collection(this.firestore, 'documentos'), {
-  nombre: this.nombre,
-  descripcion: this.descripcion,
-  cantidad: this.cantidad,
-  imagenUrl,
-  pdfUrl,
-  fecha: new Date()
-});
+      await addDoc(collection(this.firestore, 'documentos'), {
+        nombre: this.nombre,
+        descripcion: this.descripcion,
+        cantidad: this.cantidad,
+        imagenUrl,
+        pdfUrl,
+        fecha: new Date()
+      });
 
-this.cantidad = 1;
-
-      alert('Documento subido correctamente ✅');
-
-      // 🔹 Limpiar formulario
+      // 🔹 Reset
       this.nombre = '';
       this.descripcion = '';
+      this.cantidad = 1;
       this.imagenFile = undefined;
       this.pdfFile = undefined;
+      this.modalOpen = false;
+
+      this.showToast(
+        'Documento subido correctamente ✅',
+        'success'
+      );
 
       // 🔹 Recargar lista
       await this.cargarDocumentos();
 
     } catch (error) {
       console.error('Error al subir:', error);
-      alert('Error al subir documento');
+      this.showToast(
+        'Error al subir el documento',
+        'danger'
+      );
     } finally {
       this.cargando = false;
     }
+  }
+
+  async showToast(
+    message: string,
+    color: 'success' | 'danger' | 'warning' | 'dark' = 'danger'
+  ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2500,
+      position: 'top',
+      color,
+      cssClass: 'custom-toast outlined-toast',
+      buttons: [{ icon: 'close', role: 'cancel' }]
+    });
+
+    await toast.present();
   }
 
   // ==========================
@@ -135,7 +184,7 @@ this.cantidad = 1;
   async cargarDocumentos() {
     const q = query(
       collection(this.firestore, 'documentos'),
-      orderBy('fecha', 'desc')
+      orderBy('nombre', 'asc')
     );
 
     const snapshot = await getDocs(q);

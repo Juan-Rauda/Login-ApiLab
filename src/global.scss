@@ -49,6 +49,48 @@ ion-button {
   text-transform: none;
 }
 
+/* CARD BASE PARA TODA LA APP */
+.app-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Textos */
+.app-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-title);
+}
+
+.app-muted {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Animación sutil */
+.animate {
+  animation: fadeUp .35s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .d-flex-center {
   display: flex;
   justify-content: center;
@@ -132,7 +174,8 @@ ion-toast.custom-toast {
 
 /* Texto */
 .custom-toast.outlined-toast::part(message) {
-  color: #1f2937; /* gris oscuro elegante */
+  color: #1f2937;
+  /* gris oscuro elegante */
 }
 
 /* Botón cerrar */

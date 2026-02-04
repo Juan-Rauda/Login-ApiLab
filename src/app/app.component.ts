@@ -13,6 +13,7 @@ import { AuthService } from 'src/service/auth.service';
 export class AppComponent implements OnInit {
 
   isLoggedIn = false;
+  userEmail: string | null = null;
 
   constructor(
     private router: Router,
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
     // Nos suscribimos al estado de login
     this.authService.loggedIn$.subscribe(status => {
       this.isLoggedIn = status;
+      this.userEmail = this.authService.currentUser?.email ?? null;
     });
   }
 

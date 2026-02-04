@@ -17,16 +17,16 @@
 
   <!-- GRID DOCUMENTOS -->
   <div class="documentos-grid">
-    <ion-card class="documento-card" *ngFor="let doc of documentos">
+
+    <ion-card class="app-card animate" *ngFor="let doc of documentos">
       <img *ngIf="doc.imagenUrl" [src]="doc.imagenUrl" class="documento-img" />
 
       <div class="documento-body">
-        <div class="documento-title">{{ doc.nombre }}</div>
-        <div class="documento-desc">{{ doc.descripcion }}</div>
+        <div class="app-title">{{ doc.nombre }}</div>
+        <div class="app-muted">{{ doc.descripcion }}</div>
         <div class="stock">Stock: {{ doc.cantidad }}</div>
 
-        <ion-button size="small" expand="block" class="boton-pdf"
-          (click)="abrirPdf(doc.pdfUrl)">
+        <ion-button size="small" expand="block" class="boton-pdf" (click)="abrirPdf(doc.pdfUrl)">
           Ver PDF
         </ion-button>
       </div>
@@ -34,76 +34,68 @@
   </div>
 
   <!-- MODAL -->
-<ion-modal class="light-modal" [isOpen]="modalOpen" (didDismiss)="modalOpen = false">
-  <ng-template>
+  <ion-modal class="light-modal" [isOpen]="modalOpen" (didDismiss)="modalOpen = false">
+    <ng-template>
 
-    <ion-header>
-      <ion-toolbar>
-        <ion-title> Nuevo documento</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="modalOpen = false">
-            Cerrar
+      <ion-header class="modal-header">
+        <ion-toolbar>
+          <ion-title> Nuevo documento</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="modalOpen = false">
+              Cerrar
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-card">
+
+        <!-- FORM -->
+        <form class="modal-form">
+
+          <ion-item>
+            <ion-input name="nombre" label="Nombre" labelPlacement="floating" [(ngModel)]="nombre">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-textarea name="descripcion" label="Descripción" labelPlacement="floating" [(ngModel)]="descripcion">
+            </ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-input name="cantidad" type="number" label="Cantidad" labelPlacement="floating" [(ngModel)]="cantidad">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Imagen (opcional)</ion-label>
+            <input type="file" (change)="seleccionarImagen($event)" />
+          </ion-item>
+
+          <ion-item>
+            <ion-label>PDF</ion-label>
+            <input type="file" accept="application/pdf" (change)="seleccionarPdf($event)" />
+          </ion-item>
+
+          <!-- BOTÓN CORREGIDO -->
+          <ion-button type="button" expand="block" class="gradient-btn" [disabled]="cargando"
+            (click)="subirDocumento()">
+
+            <ng-container *ngIf="!cargando; else loadingTpl">
+              Subir documento
+            </ng-container>
+
+            <ng-template #loadingTpl>
+              <ion-spinner name="crescent"></ion-spinner>
+            </ng-template>
+
           </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
 
-    <ion-content class="modal-card">
+        </form>
+      </ion-content>
 
-      <ion-item>
-        <ion-input
-          label="Nombre"
-          labelPlacement="floating"
-          [(ngModel)]="nombre">
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-textarea
-          label="Descripción"
-          labelPlacement="floating"
-          [(ngModel)]="descripcion">
-        </ion-textarea>
-      </ion-item>
-
-      <ion-item>
-        <ion-input
-          type="number"
-          label="Cantidad"
-          labelPlacement="floating"
-          [(ngModel)]="cantidad">
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Imagen (opcional)</ion-label>
-        <input type="file" (change)="seleccionarImagen($event)" />
-      </ion-item>
-
-      <ion-item>
-        <ion-label>PDF</ion-label>
-        <input
-          type="file"
-          accept="application/pdf"
-          (change)="seleccionarPdf($event)" />
-      </ion-item>
-
-      <ion-button
-        expand="block"
-        (click)="subirDocumento()"
-        [disabled]="cargando">
-        Subir documento
-      </ion-button>
-
-    </ion-content>
-
-  </ng-template>
-</ion-modal>
-
-
-  <!-- LOADING -->
-  <div *ngIf="cargando" class="loading-overlay">
-    <ion-spinner name="crescent"></ion-spinner>
-  </div>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>

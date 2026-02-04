@@ -44,6 +44,11 @@
         Iniciar sesión
       </ion-button>
 
+      <div *ngIf="isLoggedIn" class="user-info">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <span>{{ userEmail }}</span>
+      </div>
+
       <ion-button *ngIf="isLoggedIn" fill="clear" expand="block" class="menu-btn" (click)="logout()">
         <ion-icon slot="start" name="log-out-outline"></ion-icon>
         Cerrar sesión

@@ -10,30 +10,19 @@
 
   <div class="documentos-grid">
 
-    <ion-card class="documento-card" *ngFor="let doc of documentos">
-
-      <img
-        *ngIf="doc.imagenUrl"
-        [src]="doc.imagenUrl"
-        class="documento-img"
-      />
+    <ion-card class="app-card animate" *ngFor="let doc of documentos">
+      <img *ngIf="doc.imagenUrl" [src]="doc.imagenUrl" class="documento-img" />
 
       <div class="documento-body">
-        <div class="documento-title">{{ doc.nombre }}</div>
-
-        <div class="documento-desc">
+        <div class="app-title">{{ doc.nombre }}</div>
+        <div class="app-muted">
           {{ doc.descripcion || 'Sin descripción' }}
         </div>
 
-        <ion-button
-          size="small"
-          expand="block"
-          class="boton-pdf"
-          (click)="abrirPdf(doc.pdfUrl)">
+        <ion-button size="small" expand="block" class="boton-pdf" (click)="abrirPdf(doc.pdfUrl)">
           Ver PDF
         </ion-button>
       </div>
-
     </ion-card>
 
   </div>

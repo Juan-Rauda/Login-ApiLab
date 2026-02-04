@@ -17,6 +17,7 @@ export class AuthPage implements OnInit {
   emailVerified = false;
   showResendButton = false;
   loading = false;
+  loadingResend = false;
 
   form = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -70,7 +71,7 @@ export class AuthPage implements OnInit {
         await signOut(this.auth);
 
         await loader.dismiss();
-        
+
         this.showToast(
           'Verifica tu correo antes de iniciar sesión',
           'warning'
@@ -93,30 +94,55 @@ export class AuthPage implements OnInit {
   }
 
   async resendVerificationEmail() {
-    const user = this.auth.currentUser;
+    if (this.loadingResend) return;
 
-    if (!user) {
-      this.showToast('No hay sesión activa', 'danger');
+    const { email, password } = this.form.value;
+
+    if (!email || !password) {
+      this.showToast(
+        'Ingresa tu correo y contraseña para reenviar el correo',
+        'warning'
+      );
       return;
     }
 
-    if (user.emailVerified) {
-      this.emailVerified = true;
-      this.showToast('Tu correo ya está verificado', 'success');
-      return;
-    }
+    this.loadingResend = true;
 
     try {
+      // 🔐 Login temporal
+      const credential = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+
+      const user = credential.user;
+      await user.reload();
+
+      if (user.emailVerified) {
+        this.showToast('Tu correo ya está verificado', 'success');
+        await signOut(this.auth);
+        return;
+      }
+
+      // 📩 Reenvía verificación
       await sendEmailVerification(user);
+
       this.showToast(
-        'Correo de verificación reenviado. Revisa tu spam 📩',
+        'Correo de verificación reenviado. Revisa tu bandeja o spam 📩',
         'success'
       );
-    } catch (error) {
+
+      // 🚪 Cierra sesión inmediatamente
+      await signOut(this.auth);
+
+    } catch (error: any) {
       this.showToast(
-        'No se pudo reenviar el correo. Intenta más tarde',
+        this.getFirebaseErrorMessage(error.code),
         'danger'
       );
+    } finally {
+      this.loadingResend = false;
     }
   }
 
