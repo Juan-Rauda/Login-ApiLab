@@ -1,5 +1,7 @@
 ion-content {
   --background: #f4f6f9;
+  --padding-bottom: 65px;
+  // padding-bottom: calc(90px + env(safe-area-inset-bottom));
 }
 
 .boton-agregar {
@@ -12,7 +14,8 @@ ion-content {
   --ion-background-color: #ffffff;
   --ion-text-color: #000000;
   // --border-radius: 16px;
-  margin: auto;    /* centrado vertical */
+  margin: auto;
+  /* centrado vertical */
   padding: 0;
 }
 
@@ -26,9 +29,12 @@ ion-content {
 
 /* Header del modal */
 .modal-header ion-toolbar {
-  --background: #3880ff; /* color sólido */
-  --color: #000000;     /* color del texto */
-  --border-width: 0;    /* quita línea inferior */
+  --background: #3880ff;
+  /* color sólido */
+  --color: #000000;
+  /* color del texto */
+  --border-width: 0;
+  /* quita línea inferior */
 }
 
 .modal-header ion-title {
@@ -42,7 +48,7 @@ ion-content {
   --background: #f9f9f9;
   border-radius: 12px;
   margin-bottom: 12px;
-  --box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  --box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* Inputs y textarea */
@@ -59,7 +65,8 @@ ion-content {
 
 /* Botón de subir documento */
 .gradient-btn {
-  --color: #ffffff; /* texto visible */
+  --color: #ffffff;
+  /* texto visible */
   font-weight: 600;
 }
 
@@ -124,3 +131,35 @@ ion-content {
 //   --ion-background-color: #ffffff;
 //   --ion-text-color: #000000;
 // }
+
+.sticky-btn {
+  position: sticky;
+  bottom: 16px;
+  z-index: 10;
+}
+
+.acciones {
+  display: flex;
+  // justify-content: space-between;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.acciones ion-button {
+  --border-radius: 10px;
+  width: 90px;
+  height: 40px;
+}
+
+.btn-ver {
+  --background: #1976d2;
+}
+
+.btn-editar {
+  --background: #fbc02d;
+  --color: #000;
+}
+
+.btn-eliminar {
+  --background: #d32f2f;
+}

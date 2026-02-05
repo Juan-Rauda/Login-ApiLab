@@ -10,10 +10,14 @@
 <ion-content>
 
   <!-- BOTÓN -->
-  <ion-button expand="block" class="boton-agregar" (click)="modalOpen = true">
+  <!-- <ion-button expand="block" class="boton-agregar" (click)="modalOpen = true">
     <ion-icon name="add-outline" slot="start"></ion-icon>
     Agregar documento
-  </ion-button>
+  </ion-button> -->
+  <!-- <ion-button expand="block" class="boton-agregar sticky-btn" (click)="modalOpen = true">
+    <ion-icon name="add-outline" slot="start"></ion-icon>
+    Agregar documento
+  </ion-button> -->
 
   <!-- GRID DOCUMENTOS -->
   <div class="documentos-grid">
@@ -26,20 +30,44 @@
         <div class="app-muted">{{ doc.descripcion }}</div>
         <div class="stock">Stock: {{ doc.cantidad }}</div>
 
-        <ion-button size="small" expand="block" class="boton-pdf" (click)="abrirPdf(doc.pdfUrl)">
-          Ver PDF
-        </ion-button>
+        <div class="acciones">
+
+          <!-- VER PDF -->
+          <ion-button size="small" class="btn-ver" (click)="abrirPdf(doc.pdfUrl)">
+            <ion-icon name="eye-outline"></ion-icon>
+          </ion-button>
+
+          <!-- EDITAR -->
+          <ion-button size="small" class="btn-editar" (click)="abrirEditar(doc)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+
+          <!-- ELIMINAR -->
+          <ion-button size="small" class="btn-eliminar" (click)="eliminarDocumento(doc)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+
+        </div>
       </div>
     </ion-card>
   </div>
 
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-button class="boton-agregar gradient-btn" (click)="modalOpen = true">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Agregar documento
+    </ion-button>
+  </ion-fab>
+
   <!-- MODAL -->
-  <ion-modal class="light-modal" [isOpen]="modalOpen" (didDismiss)="modalOpen = false">
+  <ion-modal class="light-modal" [isOpen]="modalOpen" (didDismiss)="resetFormulario()">
     <ng-template>
 
       <ion-header class="modal-header">
         <ion-toolbar>
-          <ion-title> Nuevo documento</ion-title>
+          <ion-title>
+            {{ editando ? 'Editar documento' : 'Nuevo documento' }}
+          </ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="modalOpen = false">
               Cerrar
@@ -70,20 +98,24 @@
 
           <ion-item>
             <ion-label>Imagen (opcional)</ion-label>
-            <input type="file" (change)="seleccionarImagen($event)" />
+            <input type="file" accept="image/png,image/jpeg,image/jpg,image/webp"
+              (change)="seleccionarImagen($event)" />
           </ion-item>
 
           <ion-item>
             <ion-label>PDF</ion-label>
             <input type="file" accept="application/pdf" (change)="seleccionarPdf($event)" />
           </ion-item>
+          <ion-note color="medium" *ngIf="editando">
+            Deja los archivos vacíos si no deseas cambiarlos
+          </ion-note>
 
           <!-- BOTÓN CORREGIDO -->
           <ion-button type="button" expand="block" class="gradient-btn" [disabled]="cargando"
             (click)="subirDocumento()">
 
             <ng-container *ngIf="!cargando; else loadingTpl">
-              Subir documento
+              {{ editando ? 'Guardar cambios' : 'Subir documento' }}
             </ng-container>
 
             <ng-template #loadingTpl>
