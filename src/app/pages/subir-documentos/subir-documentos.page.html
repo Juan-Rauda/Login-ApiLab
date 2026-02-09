@@ -60,7 +60,7 @@
   </ion-fab>
 
   <!-- MODAL -->
-  <ion-modal class="light-modal" [isOpen]="modalOpen" (didDismiss)="resetFormulario()">
+  <ion-modal class="light-modal" [isOpen]="modalOpen" keepContentsMounted="true" (didDismiss)="onModalDismiss()">
     <ng-template>
 
       <ion-header class="modal-header">
@@ -69,7 +69,7 @@
             {{ editando ? 'Editar documento' : 'Nuevo documento' }}
           </ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="modalOpen = false">
+            <ion-button (click)="cerrarModal()">
               Cerrar
             </ion-button>
           </ion-buttons>
@@ -92,21 +92,22 @@
           </ion-item>
 
           <ion-item>
-            <ion-input name="cantidad" type="number" label="Cantidad" labelPlacement="floating" [(ngModel)]="cantidad">
+            <ion-input required name="cantidad" type="number" label="Cantidad" labelPlacement="floating"
+              [(ngModel)]="cantidad" min="0" step="1" inputmode="numeric" pattern="[0-9]*">
             </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label>Imagen (opcional)</ion-label>
-            <input type="file" accept="image/png,image/jpeg,image/jpg,image/webp"
+            <input #inputImagen type="file" accept="image/png,image/jpeg,image/jpg,image/webp"
               (change)="seleccionarImagen($event)" />
           </ion-item>
 
           <ion-item>
             <ion-label>PDF</ion-label>
-            <input type="file" accept="application/pdf" (change)="seleccionarPdf($event)" />
+            <input #inputPdf type="file" accept="application/pdf" (change)="seleccionarPdf($event)" />
           </ion-item>
-          <ion-note color="medium" *ngIf="editando">
+          <ion-note color="medium" *ngIf="editando" class="nota">
             Deja los archivos vacíos si no deseas cambiarlos
           </ion-note>
 

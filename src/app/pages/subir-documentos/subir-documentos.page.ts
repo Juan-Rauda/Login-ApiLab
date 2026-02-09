@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { getAuth } from 'firebase/auth';
 import { ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
@@ -56,6 +56,9 @@ export class SubirDocumentosPage implements OnInit {
   // 🔹 Storage
   storage = getStorage();
 
+  @ViewChild('inputImagen') inputImagen!: ElementRef<HTMLInputElement>;
+  @ViewChild('inputPdf') inputPdf!: ElementRef<HTMLInputElement>;
+
   constructor(
     @Inject('firebaseFirestore') private firestore: Firestore,
     private toastCtrl: ToastController,
@@ -85,6 +88,19 @@ export class SubirDocumentosPage implements OnInit {
     if (!this.nombre || (!this.editando && !this.pdfFile)) {
       this.showToast(
         'El nombre y el PDF son obligatorios',
+        'warning'
+      );
+      return;
+    }
+
+    if (
+      this.cantidad === null ||
+      this.cantidad === undefined ||
+      this.cantidad < 0 ||
+      !Number.isInteger(this.cantidad)
+    ) {
+      this.showToast(
+        'La cantidad debe ser un número entero mayor o igual a 0',
         'warning'
       );
       return;
@@ -210,6 +226,14 @@ export class SubirDocumentosPage implements OnInit {
 
     this.editando = false;
     this.docIdEditar = undefined;
+
+    // 🔥 LIMPIAR INPUT FILE
+    if (this.inputImagen) {
+      this.inputImagen.nativeElement.value = '';
+    }
+    if (this.inputPdf) {
+      this.inputPdf.nativeElement.value = '';
+    }
   }
 
   async showToast(
@@ -250,6 +274,15 @@ export class SubirDocumentosPage implements OnInit {
   // ==========================
   abrirPdf(url: string) {
     window.open(url, '_blank');
+  }
+
+  cerrarModal() {
+    this.modalOpen = false;
+  }
+
+  onModalDismiss() {
+    this.modalOpen = false;
+    this.resetFormulario();
   }
 
   abrirEditar(docu: Documento) {

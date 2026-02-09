@@ -68,6 +68,7 @@ ion-content {
   --color: #ffffff;
   /* texto visible */
   font-weight: 600;
+  margin-top: 25px;
 }
 
 .gradient-btn ion-spinner {
@@ -162,4 +163,10 @@ ion-content {
 
 .btn-eliminar {
   --background: #d32f2f;
+}
+
+.nota {
+  display: block;        // ion-note es inline por defecto
+  text-align: center;    // centra el texto
+  margin-top: 8px;
 }
