@@ -33,7 +33,7 @@ export class ListarDocumentosPage implements OnInit {
   async ngOnInit() {
     const q = query(
       collection(this.firestore, 'documentos'),
-      orderBy('fecha', 'desc')
+      orderBy('nombre', 'asc')
     );
 
     const snapshot = await getDocs(q);

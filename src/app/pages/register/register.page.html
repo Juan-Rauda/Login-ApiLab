@@ -39,15 +39,20 @@
 
       <ion-row class="ion-padding-bottom">
         <ion-col size="12">
-          <ion-button [disabled]="form.invalid" class="gradient-btn" mode="ios" expand="block" type="submit">
-            Registrarse
-            <ion-icon slot="end" name="person-add-outline"></ion-icon>
+          <ion-button [disabled]="form.invalid || loading" class="gradient-btn" mode="ios" expand="block" type="submit">
+            <ng-container *ngIf="!loading; else registerLoading">
+              Registrarse
+              <ion-icon slot="end" name="person-add-outline"></ion-icon>
+            </ng-container>
+            <ng-template #registerLoading>
+              <ion-spinner name="crescent"></ion-spinner>
+            </ng-template>
           </ion-button>
         </ion-col>
       </ion-row>
 
       <p class="ion-text-center">
-        ¿Ya tienes cuenta? 
+        ¿Ya tienes cuenta?
         <ion-button color="luterana" size="medium" (click)="goToAuth()">
           Inicia sesión
         </ion-button>

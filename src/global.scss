@@ -32,84 +32,215 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
- @import "@ionic/angular/css/palettes/dark.always.css";
+@import "@ionic/angular/css/palettes/dark.always.css";
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
-ion-content, ion-toolbar{
+ion-content,
+ion-toolbar {
   --background: linear-gradient(to left, #ca980f, #0905ec);
 }
 
-ion-item{
+ion-item {
   --background: transparent;
 }
 
-ion-button{
+ion-button {
   text-transform: none;
 }
 
+/* CARD BASE PARA TODA LA APP */
+.app-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Textos */
+.app-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-title);
+}
+
+.app-muted {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Animación sutil */
+.animate {
+  animation: fadeUp .35s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .d-flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .auth-form {
+.auth-form {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.gradient-input {
+  text-align: start;
+  padding: 10px 0;
+
+  .input {
+    position: relative;
+    background: linear-gradient(21deg, var(--ion-color-primary), var(--ion-color-secondary));
+    padding: 3px;
+    display: inline-block;
+    border-radius: 20px;
     width: 100%;
-    text-align: center;
-    padding: 20px;
+    height: 55px;
+    margin-top: 5px;
   }
 
-  .gradient-input{
-    text-align: start;
-    padding: 10px 0;
-
-    .input {
-      position: relative;
-      background: linear-gradient(21deg, var(--ion-color-primary),  var(--ion-color-secondary));
-      padding: 3px;
-      display: inline-block;
-      border-radius: 20px;
-      width: 100%;
-      height: 55px;
-      margin-top: 5px;
-    }
-
-    .input *:not(span) {
-      padding: 0 0.325em;
-    }
-    ion-label{
-      padding: 10px;
-    }
-
-    ion-input {
-      font-family: inherit;
-      line-height: inherit;
-      width: 100%;
-      height: 49px;
-      background: linear-gradient(to left, #0d0d0d, #001926);
-      color: #cecece;
-      border-radius: 17px;
-      --padding-start: 15px;
-      --highlight-height: 0;
-      --highlight-color-focused: #cecece;
-    }
-
+  .input *:not(span) {
+    padding: 0 0.325em;
   }
 
- .gradient-btn{
-    margin-top: 35px;
-    --background: linear-gradient(21deg, var(--ion-color-primary),  var(--ion-color-secondary));
-    --background-activated: linear-gradient(21deg, var(--ion-color-secondary), var(--ion-color-primary));
-    --background-hover: linear-gradient(21deg, var(--ion-color-secondary), var(--ion-color-primary));
+  ion-label {
+    padding: 10px;
   }
 
-  .alert-button-inner{
-    color: white;
+  ion-input {
+    font-family: inherit;
+    line-height: inherit;
+    width: 100%;
+    height: 49px;
+    background: linear-gradient(to left, #0d0d0d, #001926);
+    color: #cecece;
+    border-radius: 17px;
+    --padding-start: 15px;
+    --highlight-height: 0;
+    --highlight-color-focused: #cecece;
   }
 
-  @media (min-width: 769px) {
-    .auth-form {
-        width: 500px;
-    }
+}
+
+.gradient-btn {
+  margin-top: 35px;
+  --background: linear-gradient(21deg, var(--ion-color-primary), var(--ion-color-secondary));
+  --background-activated: linear-gradient(21deg, var(--ion-color-secondary), var(--ion-color-primary));
+  --background-hover: linear-gradient(21deg, var(--ion-color-secondary), var(--ion-color-primary));
+}
+
+@media (min-width: 769px) {
+  .auth-form {
+    width: 500px;
   }
+}
+
+ion-toast.custom-toast {
+  --border-radius: 14px;
+  --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --font-size: 1rem;
+  text-align: center;
+}
+
+/* Toast con contorno y mejor contraste */
+.custom-toast.outlined-toast {
+  --border-radius: 14px;
+  --border-width: 2px;
+  --border-style: solid;
+  --border-color: rgba(0, 0, 0, 0.25);
+
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* Texto */
+.custom-toast.outlined-toast::part(message) {
+  color: #1f2937;
+  /* gris oscuro elegante */
+}
+
+/* Botón cerrar */
+.custom-toast.outlined-toast::part(button) {
+  color: #111827;
+}
+
+/* Fondo más suave por tipo */
+ion-toast[color="warning"].outlined-toast {
+  --background: #fff3cd;
+}
+
+ion-toast[color="danger"].outlined-toast {
+  --background: #fdecea;
+}
+
+ion-toast[color="success"].outlined-toast {
+  --background: #e6f4ea;
+}
+
+ion-alert.confirm-alert {
+  --background: #ffffff;
+  --color: #111827;
+}
+
+.confirm-alert .alert-wrapper {
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.confirm-alert .alert-title {
+  font-weight: 600;
+  text-align: center;
+  font-size: 18px;
+  color: #111827;
+}
+
+.confirm-alert .alert-message {
+  text-align: center;
+  font-size: 14px;
+  color: #374151;
+  margin-top: 8px;
+}
+
+.confirm-alert .alert-button-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.confirm-alert .alert-button {
+  font-weight: 600;
+}
+
+.confirm-alert .alert-button-role-cancel {
+  color: #6b7280;
+}
+
+.confirm-alert .alert-button-role-destructive {
+  color: #dc2626;
+}
+
+ion-loading {
+  --border-radius: 16px;
+  --background: #ffffff;
+  --spinner-color: var(--ion-color-primary);
+  font-weight: 500;
+}

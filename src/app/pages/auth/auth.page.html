@@ -28,28 +28,46 @@
         </div>
       </div>
 
-      <p class="ion-text-end">¿Olvidaste tu contraseña?</p>
+      <p class="ion-text-end forgot-password" [class.disabled]="form.controls.email.invalid"
+        (click)="form.controls.email.valid && resetPassword()">
+        ¿Olvidaste tu contraseña?
+      </p>
 
       <ion-row class="ion-padding-bottom">
-        <ion-col size="9">
-          <ion-button [disabled]="form.invalid" class="gradient-btn" mode="ios" expand="block" type="submit">
-            Ingresar
-            <ion-icon slot="end" name="log-in-outline"></ion-icon>
+        <ion-col size="12">
+          <ion-button [disabled]="form.invalid || loading" class="gradient-btn" mode="ios" expand="block" type="submit">
+            <ng-container *ngIf="!loading; else loadingTpl">
+              Ingresar
+              <ion-icon slot="end" name="log-in-outline"></ion-icon>
+            </ng-container>
+
+            <ng-template #loadingTpl>
+              <ion-spinner name="crescent"></ion-spinner>
+            </ng-template>
+          </ion-button>
+          <ion-button *ngIf="showResendButton && !emailVerified" expand="block" fill="outline" color="warning"
+            [disabled]="loadingResend" (click)="resendVerificationEmail()">
+            <ng-container *ngIf="!loadingResend; else resendLoading">
+              Reenviar correo de verificación
+            </ng-container>
+            <ng-template #resendLoading>
+              <ion-spinner name="crescent"></ion-spinner>
+            </ng-template>
           </ion-button>
         </ion-col>
-        <ion-col size="3">
+        <!-- <ion-col size="3">
           <ion-button class="gradient-btn ion-no-padding" mode="ios" expand="block">
             <ion-icon name="finger-print-outline"></ion-icon>
           </ion-button>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
 
-<p>  ¿No tienes cuenta? </p>
-<p>
-  <ion-button color="luterana" size="medium" (click)="goToRegister()">
-    Regístrate
-  </ion-button>
-</p>
+      <p> ¿No tienes cuenta? </p>
+      <p>
+        <ion-button color="luterana" size="medium" (click)="goToRegister()">
+          Regístrate
+        </ion-button>
+      </p>
 
 
     </form>

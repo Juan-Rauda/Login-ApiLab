@@ -2,17 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { ToastController } from '@ionic/angular';
+import { sendEmailVerification, signOut } from 'firebase/auth';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  standalone:false
+  standalone: false
 })
 export class RegisterPage implements OnInit {
 
+  loading = false;
 
-//definicion de campos para el registrer  
+  //definicion de campos para el registrer  
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -21,29 +24,88 @@ export class RegisterPage implements OnInit {
 
   auth = getAuth(); //inicializamos el objeto de autenticacion para que firebase pueda crear usuarios
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private toastCtrl: ToastController
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   async register() {
-    if (!this.form.valid) return;
-//Validamos que los campos colocados cumplan con los formatos correctos
-    const { email, password, confirmPassword } = this.form.value;
-//nos aseguramos que la contraseña coincida con el apartado de Confirmar contraseña
-    if (password !== confirmPassword) {
-      alert('❌ Las contraseñas no coinciden');
+    if (this.loading) return;
+    if (!this.form.valid) {
+      this.showToast('Completa todos los campos correctamente', 'warning');
       return;
     }
-//llamamos a firebase para crear la cuenta con el email y la contraseña colocada
-//al funcionar la funcion UserCredential se le asigna y contiene la info del nuevo usuario (ID, Email, Contra)
-    try {
-      const userCredential = await createUserWithEmailAndPassword(this.auth, email!, password!);
-      console.log('Usuario registrado:', userCredential.user);
-      this.router.navigateByUrl('/home'); //si el registro fue correcto redirecciona al Home
-    } catch (error: any) {//mensaje de error (si el coreo esta en uso) 
-      console.error('Error en registro:', error);
-      alert('Error: ' + error.message);
+
+    const { email, password, confirmPassword } = this.form.value;
+
+    if (password !== confirmPassword) {
+      this.showToast('Las contraseñas no coinciden', 'danger');
+      return;
     }
+
+    if (this.isSuspiciousEmail(email!)) {
+      this.showToast('Usa un correo electrónico válido', 'warning');
+      return;
+    }
+
+    this.loading = true;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        this.auth,
+        email!,
+        password!
+      );
+
+      // ENVÍO DE CORREO DE VERIFICACIÓN
+      await sendEmailVerification(userCredential.user);
+
+      await signOut(this.auth);
+
+      this.showToast(
+        'Cuenta creada. Revisa tu correo para verificarla',
+        'success'
+      );
+
+      this.router.navigateByUrl('/auth', { replaceUrl: true });
+
+    } catch (error: any) {
+      console.error(error);
+
+      let message = 'Error al registrar usuario';
+
+      if (error.code === 'auth/email-already-in-use') {
+        message = 'Este correo ya está registrado';
+      }
+
+      this.showToast(message, 'danger');
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  async showToast(
+    message: string,
+    color: 'success' | 'danger' | 'warning' | 'dark' = 'danger'
+  ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2500,
+      position: 'top',
+      color,
+      cssClass: 'custom-toast outlined-toast',
+      buttons: [{ icon: 'close', role: 'cancel' }]
+    });
+
+    await toast.present();
+  }
+
+  isSuspiciousEmail(email: string): boolean {
+    const invalidDomains = ['example.com', 'test.com', 'mail.com'];
+    const domain = email.split('@')[1];
+    return invalidDomains.includes(domain);
   }
 
   goToAuth() {

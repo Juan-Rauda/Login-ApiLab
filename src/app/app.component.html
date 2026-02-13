@@ -1,35 +1,35 @@
 <ion-app>
   <!-- MENÚ GLOBAL -->
   <ion-menu side="start" contentId="main-content">
-    <ion-header >
+    <ion-header>
       <ion-toolbar color="primary">
-        <ion-title >Menú</ion-title>
+        <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding">
       <!-- OPCIONES PÚBLICAS → siempre visibles -->
-      <ion-button fill="clear" expand="block" class="menu-btn" (click)="goTohome()">
+      <ion-button fill="clear" expand="block" class="menu-btn" (click)="navigateAndClose('/home')">
         <ion-icon slot="start" name="home-outline"></ion-icon>
-        Home
+        ApiLab
       </ion-button>
-      <ion-button fill="clear" expand="block" class="menu-btn" (click)="goToPublic4()">
+      <ion-button fill="clear" expand="block" class="menu-btn" (click)="navigateAndClose('/listar-documentos')">
         <ion-icon slot="start" name="cube-outline"></ion-icon>
         Sustancias
       </ion-button>
 
       <!-- OPCIONES PRIVADAS → solo si está logueado -->
       <ng-container *ngIf="isLoggedIn">
-        <ion-button fill="clear" expand="block" class="menu-btn" (click)="goToSensor()">
+        <!-- <ion-button fill="clear" expand="block" class="menu-btn" (click)="goToSensor()">
           <ion-icon slot="start" name="cloud-outline"></ion-icon>
           Sensor de humo
-        </ion-button>
+        </ion-button> -->
 
-        <ion-button fill="clear" expand="block" class="menu-btn" (click)="goToTempHumedad()">
+        <ion-button fill="clear" expand="block" class="menu-btn" (click)="navigateAndClose('/tempsensor')">
           <ion-icon slot="start" name="thermometer-outline"></ion-icon>
           Sensor temp/humedad
         </ion-button>
-        <ion-button fill="clear" expand="block" class="menu-btn" (click)="goToSubirDoc()">
+        <ion-button fill="clear" expand="block" class="menu-btn" (click)="navigateAndClose('/subir-documentos')">
           <ion-icon slot="start" name="book-outline"></ion-icon>
           Subir Documentos
         </ion-button>
@@ -39,10 +39,15 @@
     </ion-content>
 
     <div>
-            <ion-button *ngIf="!isLoggedIn" fill="clear" expand="block" class="menu-btn" (click)="goToAuth()">
+      <ion-button *ngIf="!isLoggedIn" fill="clear" expand="block" class="menu-btn" (click)="goToAuth()">
         <ion-icon slot="start" name="lock-closed"></ion-icon>
         Iniciar sesión
       </ion-button>
+
+      <div *ngIf="isLoggedIn" class="user-info">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <span>{{ userEmail }}</span>
+      </div>
 
       <ion-button *ngIf="isLoggedIn" fill="clear" expand="block" class="menu-btn" (click)="logout()">
         <ion-icon slot="start" name="log-out-outline"></ion-icon>

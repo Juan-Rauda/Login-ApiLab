@@ -1,60 +1,125 @@
 ion-content {
   --background: #f4f6f9;
+  --padding-bottom: 65px;
+  // padding-bottom: calc(90px + env(safe-area-inset-bottom));
 }
 
 .boton-agregar {
   margin: 16px;
+  --border-radius: 14px;
 }
 
+/* Modal general */
+.light-modal {
+  --ion-background-color: #ffffff;
+  --ion-text-color: #000000;
+  // --border-radius: 16px;
+  margin: auto;
+  /* centrado vertical */
+  padding: 0;
+}
+
+/* Card interna del modal */
 .modal-card {
-  padding: 16px;
-  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.modal-header {
+/* Header del modal */
+.modal-header ion-toolbar {
+  --background: #3880ff;
+  /* color sólido */
+  --color: #000000;
+  /* color del texto */
+  --border-width: 0;
+  /* quita línea inferior */
+}
+
+.modal-header ion-title {
   font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
+  font-weight: 600;
 }
 
-ion-item {
-  --background: #ffffff;
+
+/* Formulario */
+.modal-form ion-item {
+  --background: #f9f9f9;
   border-radius: 12px;
   margin-bottom: 12px;
+  --box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
+
+/* Inputs y textarea */
+.modal-form ion-input,
+.modal-form ion-textarea {
+  font-size: 14px;
+  color: #111;
+}
+
+/* Spinner dentro del botón */
+.modal-form ion-spinner {
+  margin: 0 auto;
+}
+
+/* Botón de subir documento */
+.gradient-btn {
+  --color: #ffffff;
+  /* texto visible */
+  font-weight: 600;
+  margin-top: 25px;
+}
+
+.gradient-btn ion-spinner {
+  color: #fff;
+}
+
+// .gradient-btn {
+//   background: linear-gradient(135deg, #3880ff, #4f9cff);
+// }
+
+/* Adaptativo para móviles */
+@media (max-width: 480px) {
+  // .light-modal {
+  //   max-height: 95%;
+  // }
+
+  .modal-card {
+    padding: 16px;
+  }
+
+  .modal-form ion-item {
+    font-size: 13px;
+  }
+}
+
+// .modal-card {
+//   padding: 16px;
+//   border-radius: 16px;
+// }
+
+// .modal-header {
+//   font-size: 18px;
+//   font-weight: bold;
+//   margin-bottom: 12px;
+// }
 
 .documentos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 14px;
-  padding: 12px;
-}
-
-.documento-card {
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  padding: 14px;
 }
 
 .documento-img {
   width: 100%;
-  height: 140px;
+  height: 150px;
   object-fit: cover;
 }
 
 .documento-body {
   padding: 12px;
-}
-
-.documento-title {
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.documento-desc {
-  font-size: 13px;
-  color: #666;
-  margin: 6px 0;
 }
 
 .stock {
@@ -63,21 +128,45 @@ ion-item {
   color: #3880ff;
 }
 
-.boton-pdf {
+// .light-modal {
+//   --ion-background-color: #ffffff;
+//   --ion-text-color: #000000;
+// }
+
+.sticky-btn {
+  position: sticky;
+  bottom: 16px;
+  z-index: 10;
+}
+
+.acciones {
+  display: flex;
+  // justify-content: space-between;
+  justify-content: center;
   margin-top: 10px;
 }
 
-.loading-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+.acciones ion-button {
+  --border-radius: 10px;
+  width: 90px;
+  height: 40px;
 }
 
-.light-modal {
-  --ion-background-color: #ffffff;
-  --ion-text-color: #000000;
+.btn-ver {
+  --background: #1976d2;
+}
+
+.btn-editar {
+  --background: #fbc02d;
+  --color: #000;
+}
+
+.btn-eliminar {
+  --background: #d32f2f;
+}
+
+.nota {
+  display: block;        // ion-note es inline por defecto
+  text-align: center;    // centra el texto
+  margin-top: 8px;
 }
